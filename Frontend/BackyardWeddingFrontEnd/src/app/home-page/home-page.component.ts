@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Backyard } from 'src/app/objects/backyard';
 import { Customer } from '../objects/customer';
-import { backyards } from '../objects/listOfBackyards';
 import { RESTService } from '../REST.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { RESTService } from '../REST.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  backyardList!: Backyard[];
+  backyards!: Backyard[];
   backyard!: Backyard;
   city!: string;
   SearchCity!: string;
@@ -26,9 +25,9 @@ export class HomePageComponent implements OnInit {
   }
 
   getBackyardsByCity (city: string): void {
-    this.restService.getBackyardsByCity(city).subscribe(
+    this.restService.getBackyards(city).subscribe(
       (response: Backyard[]) => {
-        this.backyardList = response;
+        this.backyards = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -36,16 +35,7 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  getCustomer(customerId: number): void {
-    this.restService.getCustomer(customerId).subscribe(
-      (response: Customer) => {
-      this.customer = response;
-  },
-  (error: HttpErrorResponse) => {
-    alert(error.message);
-  }
-    );
-  }
+  
 
 
 

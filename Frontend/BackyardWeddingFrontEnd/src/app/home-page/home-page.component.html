@@ -1,40 +1,14 @@
 
-        <input [(ngModel)]='city'>
+<div>   Find backyard by city:  <input [(ngModel)]='city'>
         <button type="button" (click)='getBackyardsByCity(city)'>Search</button> 
-
-<div class="container">
-    <div class="row">
-        <div *ngFor="let backyard of backyardList;" class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                        <a href=""><img src="{{backyard?.backyardImage}}" class="img-fluid w-60" ></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5><a [routerLink]="['/backyard', backyard.backyardId]">{{backyard.backyardName}}</a> </h5>
-                        <p class="m-0">{{backyard.city}}</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class=""></i>{{backyard.description}}</li>                    
-                </ul>
-                
-            </div>
-        </div>
-    </div>
+        <div *ngFor="let backyard of backyards">
         <a [routerLink]="['/backyard', backyard.backyardId]">{{backyard.backyardName}}</a>  
                 {{backyard.city}}
                 {{backyard.address}}
                 {{backyard.squareFootage}}
-                hello
-    </div>
+        </div>
+   
+</div>
 
 
-        <input [(ngModel)]="customerId">
-        <button type="button" (click)="getCustomer(customerId)">Search</button>
-        <div>{{customer.firstName}}</div>
-        <div>{{customer.lastName}}</div>
-        <div>{{customer.dob}}</div>
-        <div>{{customer.email}}</div>
-        <div>{{customer.city}}</div>
         

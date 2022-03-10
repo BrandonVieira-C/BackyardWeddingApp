@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from './objects/customer';
 import { Partner } from './objects/partner';
@@ -9,6 +9,7 @@ import { Backyard } from './objects/backyard';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RESTService {
 
   private baseUrl = 'http://localhost:8080/wedding';
@@ -61,7 +62,7 @@ public getBackyard(backyardId: number): Observable<Backyard> {
   return this.http.get<Backyard>(this.baseUrl+'/getbackyard/'+backyardId);
 }
 
-public getBackyardsByCity(city: string): Observable<Backyard[]> {
+public getBackyards(city: string): Observable<Backyard[]> {
   return this.http.get<Backyard[]>(this.baseUrl+'/getbackyards/'+city);
 }
 

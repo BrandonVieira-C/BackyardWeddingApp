@@ -1,1 +1,8 @@
-<p>login-page works!</p>
+<div>  Find customer by ID: <input [(ngModel)]='customerId'>
+    <button type="button" (click)="getCustomer(customerId)">Search</button>
+     {{customer.firstName}}
+     {{customer.lastName}}
+     {{customer.dob}}
+     {{customer.email}}
+     {{customer.city}}
+</div>   
