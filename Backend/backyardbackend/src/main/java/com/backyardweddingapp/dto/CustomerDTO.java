@@ -11,19 +11,6 @@ public class CustomerDTO {
 	private String email;
 	private String city;
 	
-	public CustomerDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public CustomerDTO(Integer customerId, String firstName, String lastName, LocalDate dob, String email, String city) {
-		super();
-		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.email = email;
-		this.city = city;
-	}
 	public Integer getCustomerId() {
 		return customerId;
 	}

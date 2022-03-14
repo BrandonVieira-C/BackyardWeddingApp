@@ -3,7 +3,6 @@ package com.backyardweddingapp.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,9 +19,9 @@ import com.backyardweddingapp.dto.BackyardDTO;
 import com.backyardweddingapp.dto.CustomerDTO;
 import com.backyardweddingapp.dto.EventDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
-import com.backyardweddingapp.entity.Customer;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 import com.backyardweddingapp.service.BackyardWeddingService;
+import com.backyardweddingapp.service.HelloService;
 
 @RestController
 @RequestMapping(value="/wedding")
@@ -30,6 +29,14 @@ public class BackyardWeddingAPI {
 	
 	@Autowired
 	BackyardWeddingService backyardWeddingService;
+
+  @Autowired
+  private HelloService helloService;
+
+  @GetMapping(value = "/hi")
+  public String helloWorld() {
+    return helloService.sayHello();
+  }
 	
 	//customer CRUD methods
 	

@@ -8,27 +8,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="customer")
 public class Customer {
 	@Id
+  @Column(name="customer_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer customerId;
+
+  @Column(name="first_name")
 	private String firstName;
+
+  @Column(name="last_name")
 	private String lastName;
+
+  @Column(name="dob")
 	private LocalDate dob;
+
+  @Column(name="email")
 	private String email;
+
+  @Column(name="city")
 	private String city;
 	
-	public Customer(Integer customerId, String firstName, String lastName, LocalDate dob, String email, String city) {
-		super();
-		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.email = email;
-		this.city = city;
-	}
+
 	public Customer() {
 		super();
 	}
