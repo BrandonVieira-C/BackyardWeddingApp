@@ -18,11 +18,14 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int eventId;
+
 	@OneToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name="customer_email")
 	private Customer customer;
+
 	private int amountPaid;
 	private LocalDate dateOfEvent;
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="partner_id")
 	private Partner partner;

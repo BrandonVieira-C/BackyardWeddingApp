@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.backyardweddingapp.entity.Customer;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, String> {
 
 	
 }

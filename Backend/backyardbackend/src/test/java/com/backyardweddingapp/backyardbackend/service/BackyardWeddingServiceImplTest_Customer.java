@@ -20,16 +20,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class BackyardWeddingServiceImplTest_Customer {
   
   @Autowired
-  private CustomerRepository customerRepository;
-
-  @Autowired
   private BackyardWeddingService customerService = new BackyardWeddingServiceImpl();
 
   @Test
   void createValidCustomer() {
 
     CustomerDTO customerDTO = new CustomerDTO();
-    customerDTO.setEmail("annTseng@gmail.com");
+    customerDTO.setCustomerEmail("annTseng@gmail.com");
     customerDTO.setFirstName("Ann");
     customerDTO.setLastName("Tseng");
     customerDTO.setCity("Taiwan");

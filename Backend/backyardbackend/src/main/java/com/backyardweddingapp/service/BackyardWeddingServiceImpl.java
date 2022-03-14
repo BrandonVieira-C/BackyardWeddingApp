@@ -39,51 +39,47 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 	
 	
 	//customer CRUD methods
-	
 	@Override
-	public Integer addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException {		
+	public String addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException {		
 		Customer customer = new Customer();
 		customer.setCity(customerDTO.getCity());
 		customer.setDob(customerDTO.getDob());
-		customer.setEmail(customerDTO.getEmail());
+    customer.setCustomerEmail(customerDTO.getCustomerEmail());
 		customer.setFirstName(customerDTO.getFirstName());
 		customer.setLastName(customerDTO.getLastName());
 		Customer cu = customerRepository.save(customer);
-		return cu.getCustomerId();
+		return cu.getCustomerEmail();
 		
 	}
 	
 	@Override
-	public CustomerDTO getCustomer(Integer customerId) throws BackyardWeddingException {
-		Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+	public CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException {
+		Customer customer = customerRepository.findById(customerEmail).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
 		
 		CustomerDTO dto = new CustomerDTO();
 		dto.setCity(customer.getCity());
-		dto.setCustomerId(customer.getCustomerId());
+    dto.setCustomerEmail(customer.getCustomerEmail());
 		dto.setDob(customer.getDob());
-		dto.setEmail(customer.getEmail());
 		dto.setFirstName(customer.getFirstName());
 		dto.setLastName(customer.getLastName());	
 		return dto;
-		
 	}
 	
 	public CustomerDTO updateCustomer(CustomerDTO customerDto) throws BackyardWeddingException {	
-		Customer customer = customerRepository.findById(customerDto.getCustomerId()).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+		Customer customer = customerRepository.findById(customerDto.getCustomerEmail()).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
 		
 		CustomerDTO dto = new CustomerDTO();
 		customer.setCity(customerDto.getCity());
-		customer.setCustomerId(customerDto.getCustomerId());
+    customer.setCustomerEmail(customerDto.getCustomerEmail());
 		customer.setDob(customerDto.getDob());
-		customer.setEmail(customerDto.getEmail());
 		customer.setFirstName(customerDto.getFirstName());
 		customer.setLastName(customerDto.getLastName());	
 		return dto;	
 		
 	}
 	
-	public String deleteCustomer(Integer customerId) throws BackyardWeddingException {
-		Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+	public String deleteCustomer(String customerEmail) throws BackyardWeddingException {
+		Customer customer = customerRepository.findById(customerEmail).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
 
 		customerRepository.delete(customer);	
 		return "Account deleted.";	
@@ -214,10 +210,10 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 	//event CRUD methods
 	
 	@Override
-	public Integer addEvent(Integer customerId, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException {
+	public Integer addEvent(String customerEmail, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException {
 		Event event = new Event();
 		event.setAmountPaid(eventDto.getAmountPaid());
-		Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new BackyardWeddingException("There is no customer by this ID."));
+		Customer customer = customerRepository.findById(customerEmail).orElseThrow(() -> new BackyardWeddingException("There is no customer by this ID."));
 		event.setCustomer(customer);
 		event.setDateOfEvent(eventDto.getDateOfEvent());
 		Partner partner = partnerRepository.findById(partnerId).orElseThrow(() -> new BackyardWeddingException("There is no partner by this ID."));

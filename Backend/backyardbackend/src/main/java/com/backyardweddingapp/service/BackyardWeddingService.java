@@ -6,20 +6,16 @@ import com.backyardweddingapp.dto.BackyardDTO;
 import com.backyardweddingapp.dto.CustomerDTO;
 import com.backyardweddingapp.dto.EventDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
-import com.backyardweddingapp.entity.Customer;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 
 public interface BackyardWeddingService {
 	
 	//customer CRUD methods
 	
-	public Integer addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException;
-	
-	public CustomerDTO getCustomer(Integer customerId) throws BackyardWeddingException;
-	
-	public CustomerDTO updateCustomer(CustomerDTO customerDto) throws BackyardWeddingException;
-	
-	public String deleteCustomer(Integer customerId) throws BackyardWeddingException;
+	public String addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException;
+	public CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException;
+	public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws BackyardWeddingException;
+	public String deleteCustomer(String customerEmail) throws BackyardWeddingException;
 	
 	//partner CRUD methods
 	
@@ -45,7 +41,7 @@ public interface BackyardWeddingService {
 	
 	//event CRUD methods
 
-	public Integer addEvent(Integer customerId, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException;
+	public Integer addEvent(String CustomerEmail, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException;
 	
 	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
 	

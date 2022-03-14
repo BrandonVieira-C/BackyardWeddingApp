@@ -20,16 +20,13 @@ public class CustomerRepositoryTest {
 
   private Customer customer;
 
-  // saving it and see if the container object exist.
-  // this is not really needed since we have the saveCustomerValidTest below. We need to change primary key to string...
   @BeforeEach
   public void setUp() {
     customer = new Customer();
-    // customer.setCustomerId(1);
     customer.setFirstName("Kyla");
     customer.setLastName("Friso");
     customer.setDob(LocalDate.now());
-    customer.setEmail("kylafriso@gmail.com");
+    customer.setCustomerEmail("kylafriso@gmail.com");
     customer.setCity("Japan");
   }
 
@@ -37,15 +34,15 @@ public class CustomerRepositoryTest {
   @Test
   void saveCustomerValidTest() {
     Customer customerFromDB = customerRepository.save(customer);
-    Assertions.assertEquals("kylafriso@gmail.com", customerFromDB.getEmail());
+    Assertions.assertEquals("kylafriso@gmail.com", customerFromDB.getCustomerEmail());
   }
 
-  // testing delete
+  // testing delete: this teset is very flimsy; AssertTrue if customer is successfully saved first, then delete?
   @Test
   void deleteCustomer() {
     customerRepository.save(customer);
     customerRepository.delete(customer);
-    Optional<Customer> customers = customerRepository.findById(1);
+    Optional<Customer> customers = customerRepository.findById("kylafriso@gmail.com");
     Assertions.assertTrue(customers.isEmpty());
   }
 

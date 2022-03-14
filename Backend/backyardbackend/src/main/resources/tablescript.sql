@@ -1,49 +1,59 @@
-drop schema if exists backyardwedding_db;
-create schema backyardwedding_db;
-use backyardwedding_db;
+DROP DATABASE IF EXISTS backyardwedding_db;
+CREATE DATABASE backyardwedding_db;
+USE backyardwedding_db;
 
-create table Customer (
-	customer_id int AUTO_INCREMENT,
-	first_name varchar(25),
-	last_name varchar(25),
-	dob date,
-	email varchar(100),
-	city varchar(25),
-	primary key (customer_id)
+CREATE TABLE customer (
+  customer_email CHAR(50),
+  first_name VARCHAR(25),
+  last_name VARCHAR(25),
+  dob DATE,
+  city VARCHAR(25),
+  CONSTRAINT pk_customer PRIMARY KEY (customer_email)
 );
-
-create table Partner (
-	partner_id int AUTO_INCREMENT,
-	first_name varchar(25),
-	last_name varchar(25),
-	dob date,
-	email varchar(100),
-	city varchar(25),
-	PRIMARY KEY (partner_id)
+create table partner (
+  partner_id int AUTO_INCREMENT,
+  first_name varchar(25),
+  last_name varchar(25),
+  dob date,
+  email varchar(100),
+  city varchar(25),
+  PRIMARY KEY (partner_id)
 );
-
-create table Event (
-	event_id int auto_increment,
-	customer_id int,
-	amount_paid int,
-	date_of_event date,
-	partner_id int,
-	foreign key (partner_id) references Partner(partner_id),
-	foreign key (partner_id) references Customer(customer_id),
-	primary key (event_id)
-	
+CREATE TABLE event(
+  event_id INT AUTO_INCREMENT,
+  customer_email CHAR(50),
+  amount_paid INT,
+  date_of_event DATE,
+  partner_id INT,
+  CONSTRAINT pk_event PRIMARY KEY (event_id),
+  CONSTRAINT fk_event_customer FOREIGN KEY (customer_email) REFERENCES customer(customer_email),
+  CONSTRAINT fk_event_backyard FOREIGN KEY (partner_id) REFERENCES partner(partner_id)
 );
-
 create table Backyard (
-	backyard_id int auto_increment,
-	backyard_name varchar(25),
-	square_footage int,
-	city varchar(25),
-	partner_id int,
-	description varchar(100),
-	backyard_image varchar(200),
-	foreign key (partner_id) references Partner(partner_id),
-	primary key (backyard_id)
+  backyard_id int auto_increment,
+  backyard_name varchar(25),
+  square_footage int,
+  city varchar(25),
+  partner_id int,
+  description varchar(100),
+  backyard_image varchar(200),
+  foreign key (partner_id) references Partner(partner_id),
+  primary key (backyard_id)
 );
 
-insert into Customer values (1, 'Brandon', 'Vieira', '1993-08-29', 'brandon.c.vieira@gmail.com', 'Whitby');
+INSERT INTO customer (customer_email, first_name, last_name, dob, city)
+VALUES (
+    'brandonv@gmail.com',
+    'Brandon',
+    'Vivalacious',
+    '1993-12-13',
+    'Toronto'
+  );
+INSERT INTO customer (customer_email, first_name, last_name, dob, city)
+VALUES (
+    "nubbynub@gmail.com",
+    "nubby",
+    "nub",
+    "2001-06-15",
+    "Narnia"
+  )
