@@ -41,31 +41,31 @@ public class BackyardWeddingAPI {
   }
 	
 	//customer CRUD methods
-	
 	@PostMapping(value="/addcustomer")
-	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {		
-		String customerCreated = backyardWeddingService.addCustomer(customerDTO);	
-		return new ResponseEntity<>(customerCreated, HttpStatus.CREATED);
-		
+	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
+		backyardWeddingService.addCustomer(customerDTO);	
+    String successMsg = "Successfully added: " + customerDTO.getCustomerEmail();
+		return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
 	}	
 	
 	@GetMapping(value="/getcustomer/{customerEmail}")
 	public ResponseEntity<CustomerDTO> getCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
 		CustomerDTO dto = backyardWeddingService.getCustomer(customerEmail);	
 		return new ResponseEntity<CustomerDTO>(dto, HttpStatus.OK);
-		
 	}
 	
 	@PutMapping(value="/updatecustomer")
-	public ResponseEntity<CustomerDTO> updateCustomer (@RequestBody CustomerDTO customerDto) throws BackyardWeddingException {
-		CustomerDTO dto = backyardWeddingService.updateCustomer(customerDto);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
+	public ResponseEntity<String> updateCustomer (@RequestBody CustomerDTO customerDto) throws BackyardWeddingException {
+	  backyardWeddingService.updateCustomer(customerDto);
+    String successMsg = "Successfully updated: " + customerDto.getCustomerEmail();
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value="/deletecustomer/{customerEmail}")
 	public ResponseEntity<String> deleteCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
-		String d = backyardWeddingService.deleteCustomer(customerEmail);
-		return new ResponseEntity<>(d, HttpStatus.OK);
+		backyardWeddingService.deleteCustomer(customerEmail);
+    String successMsg = "successfully deleted: " + customerEmail; //potential bug here?
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
 	//partner CRUD methods

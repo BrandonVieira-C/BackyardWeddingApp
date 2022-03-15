@@ -11,11 +11,10 @@ import com.backyardweddingapp.exception.BackyardWeddingException;
 public interface BackyardWeddingService {
 	
 	//customer CRUD methods
-	
-	public String addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException;
-	public CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException;
-	public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws BackyardWeddingException;
-	public String deleteCustomer(String customerEmail) throws BackyardWeddingException;
+	String addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException;
+	CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException;
+	void updateCustomer(CustomerDTO customerDTO) throws BackyardWeddingException;
+	void deleteCustomer(String customerEmail) throws BackyardWeddingException;
 	
 	//partner CRUD methods
 	

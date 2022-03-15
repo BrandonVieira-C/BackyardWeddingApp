@@ -37,7 +37,7 @@ public class CustomerRepositoryTest {
     Assertions.assertEquals("kylafriso@gmail.com", customerFromDB.getCustomerEmail());
   }
 
-  // testing delete: this teset is very flimsy; AssertTrue if customer is successfully saved first, then delete?
+  // testing delete. this test seems very flimsy; AssertTrue if customer successfully saved first, then delete?
   @Test
   void deleteCustomer() {
     customerRepository.save(customer);
