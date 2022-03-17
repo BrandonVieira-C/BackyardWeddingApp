@@ -15,6 +15,12 @@ public interface BackyardWeddingService {
 	CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException;
 	void updateCustomer(CustomerDTO customerDTO) throws BackyardWeddingException;
 	void deleteCustomer(String customerEmail) throws BackyardWeddingException;
+
+  //event CRUD methods
+	public EventDTO addEvent(String customerEmail, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException;
+	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
+	public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException;
+	public String deleteEvent(Integer eventId) throws BackyardWeddingException;
 	
 	//partner CRUD methods
 	
@@ -38,14 +44,6 @@ public interface BackyardWeddingService {
 	
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException;
 	
-	//event CRUD methods
 
-	public Integer addEvent(String CustomerEmail, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException;
-	
-	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
-	
-	public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException;
-	
-	public String deleteEvent(Integer eventId) throws BackyardWeddingException;
 	
 }

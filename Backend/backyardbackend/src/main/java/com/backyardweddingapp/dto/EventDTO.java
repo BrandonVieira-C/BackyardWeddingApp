@@ -1,29 +1,19 @@
 package com.backyardweddingapp.dto;
 
 import java.time.LocalDate;
+
+import com.backyardweddingapp.entity.Backyard;
 import com.backyardweddingapp.entity.Customer;
-import com.backyardweddingapp.entity.Partner;
 
 public class EventDTO {
 	
 	private int eventId;
-	private Customer customer;
 	private int amountPaid;
 	private LocalDate dateOfEvent;
-	private Partner partner;
+  
+  private Customer customer;
+  private Backyard backyard;
 	
-	public EventDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public EventDTO(int eventId, Customer customer, int amountPaid, LocalDate dateOfEvent, Partner partner) {
-		super();
-		this.eventId = eventId;
-		this.customer = customer;
-		this.amountPaid = amountPaid;
-		this.dateOfEvent = dateOfEvent;
-		this.partner = partner;
-	}
 	public int getEventId() {
 		return eventId;
 	}
@@ -48,12 +38,18 @@ public class EventDTO {
 	public void setDateOfEvent(LocalDate dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
-	public Partner getPartner() {
-		return partner;
-	}
-	public void setPartner(Partner partner) {
-		this.partner = partner;
-	}
+  public Backyard getBackyard() {
+    return backyard;
+  }
+  public void setBackyard(Backyard backyard) {
+    this.backyard = backyard;
+  }
+  @Override
+  public String toString() {
+    return "EventDTO [amountPaid=" + amountPaid + ", backyard=" + backyard + ", customer=" + customer + ", dateOfEvent="
+        + dateOfEvent + ", eventId=" + eventId + "]";
+  }
+
 	
 	
 

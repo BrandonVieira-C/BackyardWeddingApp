@@ -131,17 +131,19 @@ public class BackyardWeddingAPI {
 	}
 	
 	//event CRUD methods
-	
-	@PostMapping(value="/addevent")
-	public ResponseEntity<String> addEvent (@RequestParam String customerEmail, @RequestParam Integer partnerId, @RequestParam Integer backyardId, @RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
-		Integer num = backyardWeddingService.addEvent(customerEmail, partnerId, backyardId, eventDTO);
-		String successMessage = "Your event has been created. Event ID: "+ num;
+	@PostMapping(value="/addevent/{backyardId}/{customerEmail}")
+	public ResponseEntity<String> addEvent (
+        @PathVariable("backyardId") Integer backyardId,
+        @PathVariable("customerEmail") String customerEmail, 
+        @RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
+
+		EventDTO dto = backyardWeddingService.addEvent(customerEmail, backyardId, eventDTO);
+		String successMessage = "Your event has been created with new event id: "+ dto.getEventId();
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
-		
 	}
 	
 	@GetMapping(value="/getevent/{eventId}")
-	public ResponseEntity<EventDTO> getEvent (@PathVariable("eventid") Integer eventId) throws BackyardWeddingException {
+	public ResponseEntity<EventDTO> getEvent (@PathVariable("eventId") Integer eventId) throws BackyardWeddingException {
 		EventDTO dto = backyardWeddingService.getEvent(eventId);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
