@@ -54,6 +54,7 @@ public class BackyardWeddingServiceImplTest_Event {
     Optional<Customer> customerContainer = Optional.of(customer);
     Mockito.when(customerRepository.findById("meepmops@gmail.com")).thenReturn(customerContainer);
 
+    // probably can just skip this entity. does it break encapsulation protocol?
     Event event = new Event();
     event.setEventId(42);
     event.setAmountPaid(2442);
