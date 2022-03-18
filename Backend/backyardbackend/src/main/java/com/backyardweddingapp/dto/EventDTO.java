@@ -1,6 +1,8 @@
 package com.backyardweddingapp.dto;
 
 import java.time.LocalDate;
+
+import com.backyardweddingapp.entity.Backyard;
 import com.backyardweddingapp.entity.Customer;
 import com.backyardweddingapp.entity.Partner;
 
@@ -10,7 +12,7 @@ public class EventDTO {
 	private Customer customer;
 	private int amountPaid;
 	private LocalDate dateOfEvent;
-	private Partner partner;
+	private Backyard backyard;
 	
 	public EventDTO() {
 		super();
@@ -22,7 +24,7 @@ public class EventDTO {
 		this.customer = customer;
 		this.amountPaid = amountPaid;
 		this.dateOfEvent = dateOfEvent;
-		this.partner = partner;
+		this.backyard = backyard;
 	}
 	public int getEventId() {
 		return eventId;
@@ -48,11 +50,11 @@ public class EventDTO {
 	public void setDateOfEvent(LocalDate dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
-	public Partner getPartner() {
-		return partner;
+	public Backyard getBackyard() {
+		return backyard;
 	}
-	public void setPartner(Partner partner) {
-		this.partner = partner;
+	public void setBackyard(Backyard backyard) {
+		this.backyard = backyard;
 	}
 	
 	

@@ -11,12 +11,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Customer {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	private Integer customerId;
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
+	@Id
+	@Column(name="customer_email")
 	private String email;
 	private String city;
 	
@@ -81,11 +82,11 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		return customerId == other.customerId;
+		return email == other.email;
 	}
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob="
+		return "FirstName=" + firstName + ", lastName=" + lastName + ", dob="
 				+ dob + ", email=" + email + ", city=" + city + "]";
 	}
 	

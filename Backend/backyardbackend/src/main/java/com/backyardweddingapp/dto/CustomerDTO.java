@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class CustomerDTO {
 	
-	private Integer customerId;
+	
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
@@ -15,21 +15,15 @@ public class CustomerDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CustomerDTO(Integer customerId, String firstName, String lastName, LocalDate dob, String email, String city) {
+	public CustomerDTO(String firstName, String lastName, LocalDate dob, String email, String city) {
 		super();
-		this.customerId = customerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = dob;
 		this.email = email;
 		this.city = city;
 	}
-	public Integer getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+
 	public String getFirstName() {
 		return firstName;
 	}
