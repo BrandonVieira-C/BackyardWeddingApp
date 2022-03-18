@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//HELLO
+//HELLO we in tha building
 @Entity
 public class Backyard {
 	@Id
