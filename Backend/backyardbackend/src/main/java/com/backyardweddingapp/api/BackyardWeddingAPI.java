@@ -23,7 +23,7 @@ import com.backyardweddingapp.dto.PartnerDTO;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 import com.backyardweddingapp.service.BackyardWeddingService;
 import com.backyardweddingapp.service.HelloService;
-//test11
+//test13
 @CrossOrigin
 @RestController
 @RequestMapping(value="/wedding")
