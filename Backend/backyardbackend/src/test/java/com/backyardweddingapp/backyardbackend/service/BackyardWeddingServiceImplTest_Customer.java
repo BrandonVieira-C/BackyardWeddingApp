@@ -66,7 +66,6 @@ public class BackyardWeddingServiceImplTest_Customer {
     customer.setFirstName("Yume");
     customer.setLastName("Fukao");
     Optional<Customer> customerContainer = Optional.of(customer);
-
     Mockito.when(customerRepository.findById("yumeFukao@gmail.com")).thenReturn(customerContainer);
 
     CustomerDTO customerDTO = new CustomerDTO();
@@ -84,7 +83,6 @@ public class BackyardWeddingServiceImplTest_Customer {
     Customer customer = new Customer();
     customer.setCustomerEmail("noahCuckriet@gmail.com");
     Optional<Customer> customerContainer = Optional.of(customer);
-
     Mockito.when(customerRepository.findById("noahCuckriet@gmail.com")).thenReturn(customerContainer);
 
     CustomerDTO customerDTO = customerService.getCustomer("noahCuckriet@gmail.com");

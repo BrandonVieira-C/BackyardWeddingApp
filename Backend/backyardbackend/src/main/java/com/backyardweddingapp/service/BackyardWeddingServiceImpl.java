@@ -1,7 +1,6 @@
 package com.backyardweddingapp.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +100,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
       () -> new BackyardWeddingException("SERVICE ERROR: There is no backyard by this backyard id.")
     );
 
-
     Event event = new Event();
     event.setAmountPaid(eventDto.getAmountPaid());
     event.setDateOfEvent(eventDto.getDateOfEvent());
@@ -118,7 +116,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
     dto.setBackyard(event.getBackyard());
     
     return dto;
-
   }
 
   public EventDTO getEvent(Integer eventId) throws BackyardWeddingException {

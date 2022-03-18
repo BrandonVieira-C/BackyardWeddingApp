@@ -68,7 +68,46 @@ public class BackyardWeddingServiceImplTest_Event {
 
     EventDTO dto = eventService.addEvent("meepmops@gmail.com", 13, eventDTO);
     Assertions.assertEquals(2442, dto.getAmountPaid()); //some reason i cant use eventID. must be the GenerationType.IDENTITY
+  }
 
+  @Test
+  void getEventValidTest() throws BackyardWeddingException {
+    Event event = new Event();
+    event.setEventId(14);
+    event.setAmountPaid(2424);
+    Optional<Event> eventContainer = Optional.of(event);
+    Mockito.when(eventRepository.findById(14)).thenReturn(eventContainer);
+
+    EventDTO dto = eventService.getEvent(14);
+    Assertions.assertEquals(2424, dto.getAmountPaid());
+  }
+
+  @Test
+  void updateEventValidTest() throws BackyardWeddingException{
+    Event event = new Event();
+    event.setEventId(27);
+    event.setAmountPaid(72);
+    Optional<Event> eventContainer = Optional.of(event);
+    Mockito.when(eventRepository.findById(27)).thenReturn(eventContainer);
+    
+    EventDTO eventDTO = new EventDTO();
+    eventDTO.setEventId(event.getEventId());
+    eventDTO.setAmountPaid(event.getAmountPaid());
+
+    EventDTO dto = eventService.updateEvent(eventDTO);
+    Assertions.assertEquals(72, dto.getAmountPaid());
+  }
+
+  @Test
+  void deleteEventValidTest() throws BackyardWeddingException {
+    Event event = new Event();
+    event.setEventId(55);
+    event.setAmountPaid(99);
+    Optional<Event> eventContainer = Optional.of(event);
+    Mockito.when(eventRepository.findById(55)).thenReturn(eventContainer);
+
+    String successMessage = eventService.deleteEvent(55);
+    Assertions.assertEquals("Event has been deleted.", successMessage);
   }
 
 }
