@@ -1,13 +1,10 @@
 package com.backyardweddingapp.repository;
 
-import java.time.LocalDate;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import com.backyardweddingapp.entity.Event;
+
 @Component
 public interface EventRespository extends CrudRepository<Event, Integer>{
 	

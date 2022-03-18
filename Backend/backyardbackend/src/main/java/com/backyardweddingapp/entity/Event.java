@@ -24,8 +24,8 @@ public class Event {
 	private int amountPaid;
 	private LocalDate dateOfEvent;
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="partner_id")
-	private Partner partner;
+	@JoinColumn(name="backyard_id")
+	private Backyard backyard;
 	
 	public int getEventId() {
 		return eventId;
@@ -51,11 +51,11 @@ public class Event {
 	public void setDateOfEvent(LocalDate dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
-	public Partner getPartner() {
-		return partner;
+	public Backyard getBackyard() {
+		return backyard;
 	}
-	public void setPartner(Partner partner) {
-		this.partner = partner;
+	public void setBackyard(Backyard backyard) {
+		this.backyard = backyard;
 	}
 	@Override
 	public int hashCode() {
@@ -72,6 +72,7 @@ public class Event {
 		Event other = (Event) obj;
 		return eventId == other.eventId;
 	}
+
 	
 	
 	
