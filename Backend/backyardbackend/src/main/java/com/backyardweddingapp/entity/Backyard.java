@@ -13,18 +13,18 @@ public class Backyard {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int backyardId;
+  
 	private String backyardName;
 	private int squareFootage;
 	private String city;
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="partner_id")
 	private Partner partner;
+
 	private String description;
 	private String backyardImage;
-	
-	
-	
-	
+		
 	public String getBackyardImage() {
 		return backyardImage;
 	}

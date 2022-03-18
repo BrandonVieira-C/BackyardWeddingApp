@@ -31,7 +31,6 @@ create table Backyard (
   foreign key (partner_id) references Partner(partner_id),
   primary key (backyard_id)
 );
-
 CREATE TABLE event(
   event_id INT AUTO_INCREMENT,
   customer_email CHAR(50),
@@ -55,11 +54,10 @@ INSERT INTO backyard(backyard_name, square_footage, city, partner_id, descriptio
 INSERT INTO customer (customer_email, first_name, last_name, dob, city) VALUES 
     ("nubbynub@gmail.com","nubby","nub","2001-06-15","Narnia"),
     ('brandonv@gmail.com','Brandon','Vivalacious','1993-12-13','Toronto');
-
 INSERT INTO event (customer_email, amount_paid, date_of_event, backyard_id) VALUES 
     ("nubbynub@gmail.com", 1050, "2022-09-25", 1),
     ("brandonv@gmail.com", 2030, "2022-11-24", 2);
 
 --@block
 
-drop table events;
+drop table event;

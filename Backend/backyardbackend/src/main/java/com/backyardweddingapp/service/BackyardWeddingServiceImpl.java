@@ -175,6 +175,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
         .orElseThrow(() -> new BackyardWeddingException("Partner not found."));
 
     PartnerDTO dto = new PartnerDTO();
+    dto.setPartnerId(partnerId);
     dto.setCity(partner.getCity());
     dto.setDob(partner.getDob());
     dto.setEmail(partner.getEmail());

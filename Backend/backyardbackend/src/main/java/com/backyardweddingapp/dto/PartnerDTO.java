@@ -11,19 +11,6 @@ public class PartnerDTO {
 	private String email;
 	private String city;
 	
-	public PartnerDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public PartnerDTO(int partnerId, String firstName, String lastName, LocalDate dob, String email, String city) {
-		super();
-		this.partnerId = partnerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.email = email;
-		this.city = city;
-	}
 	public int getPartnerId() {
 		return partnerId;
 	}

@@ -69,7 +69,6 @@ public class BackyardWeddingAPI {
 	}
 	
 	//partner CRUD methods
-	
 	@PostMapping(value="/addpartner")
 	public ResponseEntity<String> addPartner (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
 		Integer num = backyardWeddingService.addPartner(partnerDTO);
@@ -78,7 +77,7 @@ public class BackyardWeddingAPI {
 		
 	}
 	
-	@GetMapping(value="/getPartner/{partnerId}")
+	@GetMapping(value="/getpartner/{partnerId}")
 	public ResponseEntity<PartnerDTO> getPartner (@PathVariable("partnerId") Integer partnerId) throws BackyardWeddingException {
 		PartnerDTO dto = backyardWeddingService.getPartner(partnerId);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
