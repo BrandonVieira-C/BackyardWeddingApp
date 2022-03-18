@@ -13,21 +13,19 @@ public class Backyard {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int backyardId;
+  
 	private String backyardName;
 	private int squareFootage;
 	private String city;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="partner_id")
+	private Partner partner;
+
 	private String description;
 	private String backyardImage;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "partner_id")
-	private Partner partner;
-	
-	public Partner getPartner() {
-		return partner;
-	}
-	public void setPartner(Partner partner) {
-		this.partner = partner;
-	}
+		
+
 	public String getBackyardImage() {
 		return backyardImage;
 	}

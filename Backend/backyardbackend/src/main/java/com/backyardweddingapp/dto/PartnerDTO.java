@@ -11,7 +11,6 @@ public class PartnerDTO {
 	private String email;
 	private String city;
 
-
 	public int getPartnerId() {
 		return partnerId;
 	}

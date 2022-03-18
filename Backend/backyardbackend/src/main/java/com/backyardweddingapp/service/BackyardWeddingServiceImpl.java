@@ -1,4 +1,5 @@
 package com.backyardweddingapp.service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,73 +22,139 @@ import com.backyardweddingapp.repository.CustomerRepository;
 import com.backyardweddingapp.repository.EventRespository;
 import com.backyardweddingapp.repository.PartnerRepository;
 
-
-@Service(value="backyardService")
+@Service(value = "backyardService")
 @Transactional
 public class BackyardWeddingServiceImpl implements BackyardWeddingService {
-	
-	@Autowired
-	CustomerRepository customerRepository;
-	
-	@Autowired
-	PartnerRepository partnerRepository;
-	
-	@Autowired 
-	EventRespository eventRepository;
-	
-	@Autowired
-	BackyardRepository backyardRepository;
-	
-	
-	//customer CRUD methods
-	
-	@Override
-	public String addCustomer (CustomerDTO customerDTO) throws BackyardWeddingException {		
-		Customer customer = new Customer();
-		customer.setCity(customerDTO.getCity());
-		customer.setDob(customerDTO.getDob());
-		customer.setEmail(customerDTO.getEmail());
-		customer.setFirstName(customerDTO.getFirstName());
-		customer.setLastName(customerDTO.getLastName());
-		
-		return customer.getEmail();
-		
-	}
-	
-	@Override
-	public CustomerDTO getCustomer(String email) throws BackyardWeddingException {
-		Customer customer = customerRepository.findById(email).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
-		
-		CustomerDTO dto = new CustomerDTO();
-		dto.setCity(customer.getCity());
-		dto.setDob(customer.getDob());
-		dto.setEmail(customer.getEmail());
-		dto.setFirstName(customer.getFirstName());
-		dto.setLastName(customer.getLastName());	
-		return dto;
-		
-	}
-	
-	public CustomerDTO updateCustomer(CustomerDTO customerDto) throws BackyardWeddingException {	
-		Customer customer = customerRepository.findById(customerDto.getEmail()).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
-		
-		CustomerDTO dto = new CustomerDTO();
-		customer.setCity(customerDto.getCity());
-		customer.setDob(customerDto.getDob());
-		customer.setEmail(customerDto.getEmail());
-		customer.setFirstName(customerDto.getFirstName());
-		customer.setLastName(customerDto.getLastName());	
-		return dto;	
-		
-	}
-	
-	public String deleteCustomer(String email) throws BackyardWeddingException {
-		Customer customer = customerRepository.findById(email).orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
 
-		customerRepository.delete(customer);	
-		return "Account deleted.";	
-		
-	}
+  @Autowired
+  CustomerRepository customerRepository;
+
+  @Autowired
+  PartnerRepository partnerRepository;
+
+  @Autowired
+  EventRespository eventRepository;
+
+  @Autowired
+  BackyardRepository backyardRepository;
+
+  // customer CRUD methods
+  @Override
+  public String addCustomer(CustomerDTO customerDTO) throws BackyardWeddingException {
+    Customer customer = new Customer(); // add validation: see if customer already exist
+    customer.setCity(customerDTO.getCity());
+    customer.setDob(customerDTO.getDob());
+    customer.setCustomerEmail(customerDTO.getCustomerEmail());
+    customer.setFirstName(customerDTO.getFirstName());
+    customer.setLastName(customerDTO.getLastName());
+
+    customerRepository.save(customer);
+    return customerDTO.getCustomerEmail();
+  }
+
+  @Override
+  public CustomerDTO getCustomer(String customerEmail) throws BackyardWeddingException {
+    Customer customer = customerRepository.findById(customerEmail)
+        .orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+
+    CustomerDTO dto = new CustomerDTO();
+    dto.setCity(customer.getCity());
+    dto.setCustomerEmail(customer.getCustomerEmail());
+    dto.setDob(customer.getDob());
+    dto.setFirstName(customer.getFirstName());
+    dto.setLastName(customer.getLastName());
+    return dto;
+  }
+
+  @Override
+  public void updateCustomer(CustomerDTO customerDto) throws BackyardWeddingException {
+    Customer customer = customerRepository.findById(customerDto.getCustomerEmail())
+        .orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+
+    customer.setCity(customerDto.getCity());
+    customer.setCustomerEmail(customerDto.getCustomerEmail());
+    customer.setDob(customerDto.getDob());
+    customer.setFirstName(customerDto.getFirstName());
+    customer.setLastName(customerDto.getLastName());
+
+    return;
+  }
+
+  @Override
+  public void deleteCustomer(String customerEmail) throws BackyardWeddingException {
+    Customer customer = customerRepository.findById(customerEmail)
+        .orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
+
+    customerRepository.delete(customer);
+    return;
+  }
+
+  // event CRUD methods
+  @Override
+  public EventDTO addEvent(String customerEmail, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException {
+
+    Customer customerContainer = customerRepository.findById(customerEmail).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: There is no customer by this customer email.")
+    );
+    
+    Backyard backyardContainer = backyardRepository.findById(backyardId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: There is no backyard by this backyard id.")
+    );
+
+    Event event = new Event();
+    event.setAmountPaid(eventDto.getAmountPaid());
+    event.setDateOfEvent(eventDto.getDateOfEvent());
+    event.setCustomer(customerContainer);
+    event.setBackyard(backyardContainer);
+
+    eventRepository.save(event);
+
+    EventDTO dto = new EventDTO();
+    dto.setEventId(event.getEventId());
+    dto.setAmountPaid(event.getAmountPaid());
+    dto.setDateOfEvent(event.getDateOfEvent());
+    dto.setCustomer(event.getCustomer());
+    dto.setBackyard(event.getBackyard());
+    
+    return dto;
+  }
+
+  public EventDTO getEvent(Integer eventId) throws BackyardWeddingException {
+    Event event = eventRepository.findById(eventId)
+        .orElseThrow(() -> new BackyardWeddingException("Event not found."));
+
+    EventDTO dto = new EventDTO();
+    dto.setAmountPaid(event.getAmountPaid());
+    dto.setCustomer(event.getCustomer());
+    dto.setDateOfEvent(event.getDateOfEvent());
+    dto.setEventId(event.getEventId());
+    // dto.setPartner(event.getPartner());
+    return dto;
+
+  }
+
+  public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException {
+    Event event = eventRepository.findById(eventDto.getEventId())
+        .orElseThrow(() -> new BackyardWeddingException("Event not found."));
+
+    event.setAmountPaid(eventDto.getAmountPaid());
+    event.setCustomer(eventDto.getCustomer());
+    event.setDateOfEvent(eventDto.getDateOfEvent());
+    event.setEventId(eventDto.getEventId());
+    // event.setPartner(eventDto.getPartner());
+    return eventDto;
+
+  }
+
+  public String deleteEvent(Integer eventId) throws BackyardWeddingException {
+    Event event = eventRepository.findById(eventId)
+        .orElseThrow(() -> new BackyardWeddingException("Event not found."));
+
+    eventRepository.delete(event);
+    return "Event has been deleted.";
+
+  }
+	
 	
 	//partner CRUD methods
 	
@@ -231,64 +298,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		
 		return "Backyard deleted.";
 		
-	}
-	
-	//event CRUD methods
-	
-	@Override
-	public Integer addEvent(String email, Integer partnerId, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException {
-		Event event = new Event();
-		event.setAmountPaid(eventDto.getAmountPaid());
-		Customer customer = customerRepository.findById(email).orElseThrow(() -> new BackyardWeddingException("There is no customer by this ID."));
-		event.setCustomer(customer);
-		event.setDateOfEvent(eventDto.getDateOfEvent());
-		Backyard backyard = backyardRepository.findById(backyardId).orElseThrow(() -> new BackyardWeddingException("There is no backyard by this ID."));
-		event.setBackyard(backyard);
-		
-		Event event2 = eventRepository.save(event);
-		return event2.getEventId();
-		
-	}
-	
-	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException {
-		Event event = eventRepository.findById(eventId)
-				.orElseThrow(() -> new BackyardWeddingException("Event not found."));
-		
-		EventDTO dto = new EventDTO();
-		dto.setAmountPaid(event.getAmountPaid());
-		dto.setCustomer(event.getCustomer());
-		dto.setDateOfEvent(event.getDateOfEvent());
-		dto.setEventId(event.getEventId());
-		dto.setBackyard(event.getBackyard());	
-		return dto;
-		
-	}
-	
-	public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException {
-		Event event = eventRepository.findById(eventDto.getEventId())
-				.orElseThrow(() -> new BackyardWeddingException("Event not found."));
-		
-		event.setAmountPaid(eventDto.getAmountPaid());
-		event.setCustomer(eventDto.getCustomer());
-		event.setDateOfEvent(eventDto.getDateOfEvent());
-		event.setEventId(eventDto.getEventId());
-		event.setBackyard(eventDto.getBackyard());		
-		return eventDto;
-		
-	}
-	
-	public String deleteEvent(Integer eventId) throws BackyardWeddingException {
-		Event event = eventRepository.findById(eventId)
-				.orElseThrow(() -> new BackyardWeddingException("Event not found."));
-		
-		eventRepository.delete(event);		
-	    return "Event has been deleted.";
-		
-	}
-
-
-	
-	
-	
+	}	
 
 }

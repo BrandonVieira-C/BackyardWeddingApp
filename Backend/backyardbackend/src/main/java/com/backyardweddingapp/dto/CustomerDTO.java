@@ -3,28 +3,22 @@ package com.backyardweddingapp.dto;
 import java.time.LocalDate;
 
 public class CustomerDTO {
-	
-	
+
+  private String customerEmail;
+
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
-	private String email;
 	private String city;
 	
-	public CustomerDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public CustomerDTO(String firstName, String lastName, LocalDate dob, String email, String city) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.email = email;
-		this.city = city;
-	}
+	public String getCustomerEmail() {
+    return customerEmail;
+  }
+  public void setCustomerEmail(String customerEmail) {
+    this.customerEmail = customerEmail;
+  }
+  public String getFirstName() {
 
-	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
@@ -41,12 +35,6 @@ public class CustomerDTO {
 	}
 	public void setDob(LocalDate string) {
 		this.dob = string;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getCity() {
 		return city;

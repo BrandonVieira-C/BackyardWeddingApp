@@ -1,9 +1,9 @@
 package com.backyardweddingapp.entity;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,16 +13,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Events")
+@Table(name="event")
 public class Event {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="event_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //this allows information transmittion from db to entity.
 	private int eventId;
-	@OneToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="customer_id")
-	private Customer customer;
+
+  @Column(name="amount_paid")
 	private int amountPaid;
+
+  @Column(name="date_of_event")
 	private LocalDate dateOfEvent;
+
+  @OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="customer_email")
+	private Customer customer;
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="backyard_id")
 	private Backyard backyard;
@@ -51,33 +59,19 @@ public class Event {
 	public void setDateOfEvent(LocalDate dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
-	public Backyard getBackyard() {
-		return backyard;
-	}
-	public void setBackyard(Backyard backyard) {
-		this.backyard = backyard;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(eventId);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Event other = (Event) obj;
-		return eventId == other.eventId;
-	}
+  
+  public Backyard getBackyard() {
+    return backyard;
+  }
+  public void setBackyard(Backyard backyard) {
+    this.backyard = backyard;
+  }
+  
+  @Override
+  public String toString() {
+    return "Event [amountPaid=" + amountPaid + ", backyard=" + backyard + ", customer=" + customer + ", dateOfEvent="
+        + dateOfEvent + ", eventId=" + eventId + "]";
+  }
 
-	
-	
-	
-	
-	
-	
 
 }

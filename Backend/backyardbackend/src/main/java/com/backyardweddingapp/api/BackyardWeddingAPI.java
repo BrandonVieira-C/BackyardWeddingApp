@@ -3,9 +3,9 @@ package com.backyardweddingapp.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,47 +20,57 @@ import com.backyardweddingapp.dto.BackyardDTO;
 import com.backyardweddingapp.dto.CustomerDTO;
 import com.backyardweddingapp.dto.EventDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
-import com.backyardweddingapp.entity.Customer;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 import com.backyardweddingapp.service.BackyardWeddingService;
+import com.backyardweddingapp.service.HelloService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/wedding")
 public class BackyardWeddingAPI {
 	
 	@Autowired
 	BackyardWeddingService backyardWeddingService;
+
+  @Autowired
+  private HelloService helloService;
+
+  @GetMapping(value = "/hi")
+  public String helloWorld() {
+    return helloService.sayHello();
+  }
 	
 	//customer CRUD methods
-	
 	@PostMapping(value="/addcustomer")
-	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {		
-		String customerCreated = backyardWeddingService.addCustomer(customerDTO);	
-		return new ResponseEntity<>(customerCreated, HttpStatus.CREATED);
-		
+	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
+		backyardWeddingService.addCustomer(customerDTO);	
+    String successMsg = "Successfully added: " + customerDTO.getCustomerEmail();
+		return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
 	}	
 	
-	@GetMapping(value="/getcustomer/{customerId}")
-	public ResponseEntity<CustomerDTO> getCustomer (@PathVariable("customerId") String email) throws BackyardWeddingException {
-		CustomerDTO dto = backyardWeddingService.getCustomer(email);	
+	@GetMapping(value="/getcustomer/{customerEmail}")
+	public ResponseEntity<CustomerDTO> getCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
+		CustomerDTO dto = backyardWeddingService.getCustomer(customerEmail);	
+
 		return new ResponseEntity<CustomerDTO>(dto, HttpStatus.OK);
-		
 	}
 	
 	@PutMapping(value="/updatecustomer")
-	public ResponseEntity<CustomerDTO> updateCustomer (@RequestBody CustomerDTO customerDto) throws BackyardWeddingException {
-		CustomerDTO dto = backyardWeddingService.updateCustomer(customerDto);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
+	public ResponseEntity<String> updateCustomer (@RequestBody CustomerDTO customerDto) throws BackyardWeddingException {
+	  backyardWeddingService.updateCustomer(customerDto);
+    String successMsg = "Successfully updated: " + customerDto.getCustomerEmail();
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/deletecustomer/{customerId}")
-	public ResponseEntity<String> deleteCustomer (@PathVariable("customerId") String email) throws BackyardWeddingException {
-		String d = backyardWeddingService.deleteCustomer(email);
-		return new ResponseEntity<>(d, HttpStatus.OK);
+	@DeleteMapping(value="/deletecustomer/{customerEmail}")
+	public ResponseEntity<String> deleteCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
+		backyardWeddingService.deleteCustomer(customerEmail);
+    String successMsg = "successfully deleted: " + customerEmail; //potential bug here?
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
+
 	}
 	
 	//partner CRUD methods
-	
 	@PostMapping(value="/addpartner")
 	public ResponseEntity<String> addPartner (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
 		Integer num = backyardWeddingService.addPartner(partnerDTO);
@@ -122,17 +132,21 @@ public class BackyardWeddingAPI {
 	}
 	
 	//event CRUD methods
+	@PostMapping(value="/addevent/{backyardId}/{customerEmail}")
+	public ResponseEntity<String> addEvent (
+        @PathVariable("backyardId") Integer backyardId,
+        @PathVariable("customerEmail") String customerEmail, 
+        @RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
+
+		EventDTO dto = backyardWeddingService.addEvent(customerEmail, backyardId, eventDTO);
+		String successMessage = "Your event has been created with new event id: "+ dto.getEventId();
 	
-	@PostMapping(value="/addevent")
-	public ResponseEntity<String> addEvent (@RequestParam String email, @RequestParam Integer partnerId, @RequestParam Integer backyardId, @RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
-		Integer num = backyardWeddingService.addEvent(email, partnerId, backyardId, eventDTO);
-		String successMessage = "Your event has been created. Event ID: "+ num;
+	
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
-		
 	}
 	
 	@GetMapping(value="/getevent/{eventId}")
-	public ResponseEntity<EventDTO> getEvent (@PathVariable("eventid") Integer eventId) throws BackyardWeddingException {
+	public ResponseEntity<EventDTO> getEvent (@PathVariable("eventId") Integer eventId) throws BackyardWeddingException {
 		EventDTO dto = backyardWeddingService.getEvent(eventId);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
