@@ -5,11 +5,11 @@ import java.time.LocalDate;
 public class CustomerDTO {
 
   private String customerEmail;
+
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
 	private String city;
-	
 	
 	public String getCustomerEmail() {
     return customerEmail;
@@ -18,6 +18,7 @@ public class CustomerDTO {
     this.customerEmail = customerEmail;
   }
   public String getFirstName() {
+
 		return firstName;
 	}
 	public void setFirstName(String firstName) {

@@ -8,5 +8,6 @@ import com.backyardweddingapp.entity.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, String> {
 
+
 	
 }

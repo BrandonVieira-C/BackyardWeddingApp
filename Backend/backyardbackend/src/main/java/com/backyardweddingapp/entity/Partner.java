@@ -1,23 +1,35 @@
 package com.backyardweddingapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Partner {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="partner_id")
 	private int partnerId;
+	@Column(name="first_name")
 	private String firstName;
+	@Column(name="last_name")
 	private String lastName;
+	@Column(name="dob")
 	private LocalDate dob;
+	@Column(name="email")
 	private String email;
+	@Column(name="city")
 	private String city;
+	
 	
 	public int getPartnerId() {
 		return partnerId;

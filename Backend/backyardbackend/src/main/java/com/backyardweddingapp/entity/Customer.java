@@ -19,6 +19,7 @@ public class Customer {
 	private String customerEmail;
 
   @Column(name="first_name")
+
 	private String firstName;
 
   @Column(name="last_name")
@@ -29,8 +30,7 @@ public class Customer {
 
   @Column(name="city")
 	private String city;
-	
-	
+		
 	public String getCustomerEmail() {
     return customerEmail;
   }

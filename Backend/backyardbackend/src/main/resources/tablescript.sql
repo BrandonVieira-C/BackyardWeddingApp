@@ -1,6 +1,7 @@
--- DROP DATABASE IF EXISTS backyardwedding_db;
--- CREATE DATABASE backyardwedding_db;
--- USE backyardwedding_db;
+
+DROP DATABASE IF EXISTS backyardwedding_db;
+CREATE DATABASE backyardwedding_db;
+USE backyardwedding_db;
 
 CREATE TABLE customer (
   customer_email CHAR(50),
@@ -19,7 +20,6 @@ create table partner (
   city varchar(25),
   PRIMARY KEY (partner_id)
 );
-
 create table Backyard (
   backyard_id int auto_increment,
   backyard_name varchar(25),
@@ -42,7 +42,6 @@ CREATE TABLE event(
   CONSTRAINT fk_event_backyard FOREIGN KEY (backyard_id) REFERENCES backyard(backyard_id)
 );
 
---@block
 INSERT INTO partner(first_name, last_name, dob, email, city) VALUES 
     ("Julia", "bubbles", "1995-03-13", "juliabubbles@gmail.com", "Kelowna"),
     ("Addi", "Gandhi", "2001,05-18", "addighandi@gmail.com", "Calgary");
@@ -58,6 +57,4 @@ INSERT INTO event (customer_email, amount_paid, date_of_event, backyard_id) VALU
     ("nubbynub@gmail.com", 1050, "2022-09-25", 1),
     ("brandonv@gmail.com", 2030, "2022-11-24", 2);
 
---@block
 
-drop table event;

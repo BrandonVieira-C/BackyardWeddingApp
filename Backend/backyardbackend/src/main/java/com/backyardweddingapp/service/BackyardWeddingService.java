@@ -2,12 +2,14 @@ package com.backyardweddingapp.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.backyardweddingapp.dto.BackyardDTO;
 import com.backyardweddingapp.dto.CustomerDTO;
 import com.backyardweddingapp.dto.EventDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
 import com.backyardweddingapp.exception.BackyardWeddingException;
-
+@Component
 public interface BackyardWeddingService {
 	
 	//customer CRUD methods
@@ -21,6 +23,7 @@ public interface BackyardWeddingService {
 	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
 	public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException;
 	public String deleteEvent(Integer eventId) throws BackyardWeddingException;
+
 	
 	//partner CRUD methods
 	
@@ -43,7 +46,6 @@ public interface BackyardWeddingService {
 	public BackyardDTO updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException;
 	
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException;
-	
 
 	
 }

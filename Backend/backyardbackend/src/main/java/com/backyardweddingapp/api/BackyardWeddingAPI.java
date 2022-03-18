@@ -51,6 +51,7 @@ public class BackyardWeddingAPI {
 	@GetMapping(value="/getcustomer/{customerEmail}")
 	public ResponseEntity<CustomerDTO> getCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
 		CustomerDTO dto = backyardWeddingService.getCustomer(customerEmail);	
+
 		return new ResponseEntity<CustomerDTO>(dto, HttpStatus.OK);
 	}
 	
@@ -66,6 +67,7 @@ public class BackyardWeddingAPI {
 		backyardWeddingService.deleteCustomer(customerEmail);
     String successMsg = "successfully deleted: " + customerEmail; //potential bug here?
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
+
 	}
 	
 	//partner CRUD methods
@@ -138,6 +140,8 @@ public class BackyardWeddingAPI {
 
 		EventDTO dto = backyardWeddingService.addEvent(customerEmail, backyardId, eventDTO);
 		String successMessage = "Your event has been created with new event id: "+ dto.getEventId();
+	
+	
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	

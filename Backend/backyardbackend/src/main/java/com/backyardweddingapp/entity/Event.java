@@ -59,6 +59,7 @@ public class Event {
 	public void setDateOfEvent(LocalDate dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
+  
   public Backyard getBackyard() {
     return backyard;
   }
@@ -71,5 +72,6 @@ public class Event {
     return "Event [amountPaid=" + amountPaid + ", backyard=" + backyard + ", customer=" + customer + ", dateOfEvent="
         + dateOfEvent + ", eventId=" + eventId + "]";
   }
+
 
 }

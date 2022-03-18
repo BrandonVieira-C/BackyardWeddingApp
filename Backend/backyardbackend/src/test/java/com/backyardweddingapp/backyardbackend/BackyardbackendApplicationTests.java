@@ -9,5 +9,4 @@ class BackyardbackendApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

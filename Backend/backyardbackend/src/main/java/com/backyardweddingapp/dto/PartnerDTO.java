@@ -10,7 +10,7 @@ public class PartnerDTO {
 	private LocalDate dob;
 	private String email;
 	private String city;
-	
+
 	public int getPartnerId() {
 		return partnerId;
 	}
