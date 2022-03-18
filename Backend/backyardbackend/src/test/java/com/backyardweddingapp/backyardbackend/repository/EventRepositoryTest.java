@@ -51,6 +51,4 @@ public class EventRepositoryTest {
     Assertions.assertTrue(eventContainer.isEmpty());
   }
 
-
-
 }
