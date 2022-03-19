@@ -40,7 +40,7 @@ public class BackyardRepositoryTest {
 		partner.setLastName("Nullo");
 		partner.setPartnerId(3);
 		
-		yard1.setPartner(partner);
+		// yard1.setPartner(partner);
 		
 		yardfromDB = backyardRepo.save(yard1);
 		

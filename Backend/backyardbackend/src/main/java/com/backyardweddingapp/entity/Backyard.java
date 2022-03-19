@@ -1,30 +1,40 @@
 package com.backyardweddingapp.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//HELLO
+import javax.persistence.Table;
+
 @Entity
+@Table(name="backyard")
 public class Backyard {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int backyardId;
   
+  @Column(name="backyard_name")
 	private String backyardName;
+
+  @Column(name="square_footage")
 	private int squareFootage;
+
+  @Column(name="city")
 	private String city;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="partner_id")
 	private Partner partner;
 
+  @Column(name="description")
 	private String description;
+
+  @Column(name="backyard_image")
 	private String backyardImage;
-		
 
 	public String getBackyardImage() {
 		return backyardImage;
@@ -62,8 +72,5 @@ public class Backyard {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-	
-	
 
 }

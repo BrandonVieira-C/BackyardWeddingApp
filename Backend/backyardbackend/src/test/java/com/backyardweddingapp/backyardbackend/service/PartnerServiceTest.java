@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
+// import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -95,7 +95,7 @@ public class PartnerServiceTest {
 		backyard.setCity("Whitby");
 		backyard.setDescription("Lit");
 		backyard.setSquareFootage(124);
-		backyard.setPartner(partner);
+		// backyard.setPartner(partner);
 		List<Backyard> list = new ArrayList<Backyard>();
 		list.add(backyard);
 		Mockito.when(backyardRepo.findByPartner(partner.getPartnerId())).thenReturn(Optional.of(list));

@@ -1,7 +1,6 @@
 package com.backyardweddingapp.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,7 +216,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		partner.setFirstName(backyardDto.getPartner().getFirstName());
 		partner.setLastName(backyardDto.getPartner().getLastName());
 		partner.setPartnerId(backyardDto.getPartner().getPartnerId());
-		backyard.setPartner(partner);
+		// backyard.setPartner(partner);
 		
 		Backyard backyard2 = backyardRepository.save(backyard);	
 		return backyard2.getBackyardId();
@@ -230,7 +229,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		BackyardDTO dto = new BackyardDTO();
 		dto.setBackyardName(backyard.getBackyardName());
 		dto.setCity(backyard.getCity());
-		dto.setPartner(backyard.getPartner());
+		// dto.setPartner(backyard.getPartner());
 		dto.setSquareFootage(backyard.getSquareFootage());
 		dto.setDescription(backyard.getDescription());
 		return dto;
@@ -246,7 +245,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 			BackyardDTO dto = new BackyardDTO();
 			dto.setBackyardId(entity.getBackyardId());
 			dto.setBackyardName(entity.getBackyardName());
-			dto.setPartner(entity.getPartner());
+			// dto.setPartner(entity.getPartner());
 			dto.setCity(entity.getCity());
 			dto.setSquareFootage(entity.getSquareFootage());
 			return dto;
@@ -263,7 +262,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		entity.setBackyardImage(backyardDto.getBackyardImage());
 		entity.setBackyardName(backyardDto.getBackyardName());
 		entity.setCity(backyardDto.getCity());
-		entity.setPartner(backyardDto.getPartner());
+		// entity.setPartner(backyardDto.getPartner());
 		entity.setDescription(backyardDto.getDescription());
 		entity.setSquareFootage(backyardDto.getSquareFootage());
 		backyardRepository.save(entity);

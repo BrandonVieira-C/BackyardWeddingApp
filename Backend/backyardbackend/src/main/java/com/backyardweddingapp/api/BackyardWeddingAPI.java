@@ -43,27 +43,27 @@ public class BackyardWeddingAPI {
 	@PostMapping(value="/addcustomer")
 	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
 		backyardWeddingService.addCustomer(customerDTO);	
-    String successMsg = "Successfully added: " + customerDTO.getCustomerEmail();
+    String successMsg = "Customer successfully added: " + customerDTO.getCustomerEmail();
 		return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
 	}	
 	
-	@GetMapping(value="/getcustomer/{customerEmail}")
-	public ResponseEntity<CustomerDTO> getCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
-		CustomerDTO dto = backyardWeddingService.getCustomer(customerEmail);	
+	@GetMapping(value="/getcustomer")
+	public ResponseEntity<CustomerDTO> getCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
+		CustomerDTO dto = backyardWeddingService.getCustomer(customerDTO.getCustomerEmail());	
 		return new ResponseEntity<CustomerDTO>(dto, HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/updatecustomer")
 	public ResponseEntity<String> updateCustomer (@RequestBody CustomerDTO customerDto) throws BackyardWeddingException {
 	  backyardWeddingService.updateCustomer(customerDto);
-    String successMsg = "Successfully updated: " + customerDto.getCustomerEmail();
+    String successMsg = "Customer successfully updated: " + customerDto.getCustomerEmail();
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/deletecustomer/{customerEmail}")
-	public ResponseEntity<String> deleteCustomer (@PathVariable("customerEmail") String customerEmail) throws BackyardWeddingException {
-		backyardWeddingService.deleteCustomer(customerEmail);
-    String successMsg = "successfully deleted: " + customerEmail; //potential bug here?
+	@DeleteMapping(value="/deletecustomer")
+	public ResponseEntity<String> deleteCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
+		backyardWeddingService.deleteCustomer(customerDTO.getCustomerEmail());
+    String successMsg = "Customer successfully deleted: " + customerDTO.getCustomerEmail(); //potential bug here?
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	

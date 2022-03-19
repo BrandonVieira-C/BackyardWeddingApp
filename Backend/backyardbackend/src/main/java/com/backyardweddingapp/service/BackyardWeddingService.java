@@ -9,6 +9,7 @@ import com.backyardweddingapp.dto.CustomerDTO;
 import com.backyardweddingapp.dto.EventDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
 import com.backyardweddingapp.exception.BackyardWeddingException;
+
 @Component
 public interface BackyardWeddingService {
 	
