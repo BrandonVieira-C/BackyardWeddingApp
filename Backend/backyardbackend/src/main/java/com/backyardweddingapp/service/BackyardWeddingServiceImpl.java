@@ -84,7 +84,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
   public void deleteCustomer(String customerEmail) throws BackyardWeddingException {
     Customer customer = customerRepository.findById(customerEmail)
         .orElseThrow(() -> new BackyardWeddingException("Could not find customer with that ID"));
-
     customerRepository.delete(customer);
     return;
   }
@@ -143,21 +142,16 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
     event.setEventId(eventDto.getEventId());
     // event.setPartner(eventDto.getPartner());
     return eventDto;
-
   }
 
   public String deleteEvent(Integer eventId) throws BackyardWeddingException {
     Event event = eventRepository.findById(eventId)
         .orElseThrow(() -> new BackyardWeddingException("Event not found."));
-
     eventRepository.delete(event);
     return "Event has been deleted.";
-
   }
 	
-	
 	//partner CRUD methods
-	
 	@Override
 	public Integer addPartner (PartnerDTO partnerDTO) throws BackyardWeddingException {	
 		Partner partner = new Partner();
@@ -169,7 +163,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		
 		Partner partnerNewId = partnerRepository.save(partner);	
 		return partnerNewId.getPartnerId();	
-		
 	}
 	
 	public PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException {
@@ -183,37 +176,31 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		dto.setLastName(partner.getLastName());	
 		dto.setPartnerId(partner.getPartnerId());
 		return dto;
-		
 	}
 	
 	public PartnerDTO updatePartner(PartnerDTO partnerDto) throws BackyardWeddingException {
-		Partner partner = partnerRepository.findById(partnerDto.getPartnerId()).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
 
+		Partner partner = partnerRepository.findById(partnerDto.getPartnerId()).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
 		partner.setCity(partnerDto.getCity());
 		partner.setDob(partnerDto.getDob());
 		partner.setEmail(partnerDto.getEmail());
 		partner.setFirstName(partnerDto.getFirstName());
 		partner.setLastName(partnerDto.getLastName());	
 		return partnerDto;	
-		
 	}
 	
 	public String deletePartner(Integer partnerId) throws BackyardWeddingException {
+
 		Partner partner = partnerRepository.findById(partnerId).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
-
 		List<Backyard> backyards = backyardRepository.findByPartner(partnerId).orElseThrow(() -> new BackyardWeddingException("Backyard not found."));
-
 		for (Backyard b : backyards) {
 			backyardRepository.delete(b);
 		}
-		
 		partnerRepository.delete(partner);
 		return "Partner account deleted.";	
-		
 	}
 	
 	//backyard CRUD methods
-	
 	@Override
 	public Integer addBackyard (BackyardDTO backyardDto) throws BackyardWeddingException {
 		Backyard backyard = new Backyard();
@@ -233,9 +220,7 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		backyard.setPartner(partner);
 		
 		Backyard backyard2 = backyardRepository.save(backyard);	
-		
 		return backyard2.getBackyardId();
-		
 	}
 	
 	public BackyardDTO getBackyard(Integer backyardId) throws BackyardWeddingException {
@@ -267,13 +252,9 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 			return dto;
 		})
 			   .collect(Collectors.toList());
-		
-		
 		return dtoArray;
-		
 	}
 
-	
 	public BackyardDTO updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException {
 		Backyard entity = backyardRepository.findById(backyardDto.getBackyardId())
 				.orElseThrow(() -> new BackyardWeddingException("Cannot find that backyard ID."));
@@ -287,7 +268,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		entity.setSquareFootage(backyardDto.getSquareFootage());
 		backyardRepository.save(entity);
 		return backyardDto;
-		
 	}
 	
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException {
@@ -295,9 +275,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 				.orElseThrow(() -> new BackyardWeddingException("Cannot find that backyard ID."));
 		
 		backyardRepository.delete(backyard);	
-		
 		return "Backyard deleted.";
-		
 	}	
-
 }
