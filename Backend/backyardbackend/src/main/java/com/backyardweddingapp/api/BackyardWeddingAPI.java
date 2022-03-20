@@ -71,7 +71,7 @@ public class BackyardWeddingAPI {
 	@PostMapping(value="/addevent")
 	public ResponseEntity<String> addEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
 		Integer eventId = backyardWeddingService.addEvent(eventDTO);
-		String successMessage = "Your event has been created with new event id: "+ eventId;
+		String successMessage = "Event successfully created at eventId "+ eventId;
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	
@@ -84,42 +84,42 @@ public class BackyardWeddingAPI {
 	@PutMapping(value="/updateevent")
 	public ResponseEntity<String> updateEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {
 		backyardWeddingService.updateEvent(eventDTO);
-    String successMsg = "Event sucessfully updated: " + eventDTO.getEventId();
+    String successMsg = "Event sucessfully updated at eventId " + eventDTO.getEventId();
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value="/deleteevent")
 	public ResponseEntity<String> deleteEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {
 		backyardWeddingService.deleteEvent(eventDTO.getEventId());
-    String successMsg = "Event successfully deleted: " + eventDTO.getEventId();
+    String successMsg = "Event successfully deleted at eventId " + eventDTO.getEventId();
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 
-	
-	//partner CRUD methods
-	@PostMapping(value="/addpartner")
+	// ------------------------------------------------------------------------------------------------------------------------------
+
+  @PostMapping(value="/addpartner")
 	public ResponseEntity<String> addPartner (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
 		Integer num = backyardWeddingService.addPartner(partnerDTO);
-		String successMessage = "Partner ID created: " + num;
-		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+		String successMsg = "Partner ID created: " + num;
+		return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="/getpartner/{partnerId}")
-	public ResponseEntity<PartnerDTO> getPartner (@PathVariable("partnerId") Integer partnerId) throws BackyardWeddingException {
-		PartnerDTO dto = backyardWeddingService.getPartner(partnerId);
+	@GetMapping(value="/getpartner")
+	public ResponseEntity<PartnerDTO> getPartner (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
+		PartnerDTO dto = backyardWeddingService.getPartner(partnerDTO.getPartnerId());
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/updatepartner")
-	public ResponseEntity<PartnerDTO> updateParter (@RequestBody PartnerDTO partnerDto) throws BackyardWeddingException {
-		PartnerDTO dto = backyardWeddingService.updatePartner(partnerDto);
+	public ResponseEntity<PartnerDTO> updateParter (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
+		PartnerDTO dto = backyardWeddingService.updatePartner(partnerDTO);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/deletepartner/{partnerId}")
-	public ResponseEntity<String> deletePartner (@PathVariable("partnerId") Integer partnerId) throws BackyardWeddingException {
-		String thing = backyardWeddingService.deletePartner(partnerId);
-		return new ResponseEntity<>(thing, HttpStatus.OK);
+	@DeleteMapping(value="/deletepartner")
+	public ResponseEntity<String> deletePartner (@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
+		String successMsg = backyardWeddingService.deletePartner(partnerDTO.getPartnerId());
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
 	//backyard CRUD methods
@@ -130,9 +130,9 @@ public class BackyardWeddingAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="/getbackyard/{backyardId}")
-	public ResponseEntity<BackyardDTO> getBackyard (@PathVariable("backyardId") Integer backyardId) throws BackyardWeddingException {
-		BackyardDTO dto = backyardWeddingService.getBackyard(backyardId);
+	@GetMapping(value="/getbackyard")
+	public ResponseEntity<BackyardDTO> getBackyard (@RequestBody BackyardDTO backyardDTO) throws BackyardWeddingException {
+		BackyardDTO dto = backyardWeddingService.getBackyard(backyardDTO.getBackyardId());
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
@@ -143,16 +143,15 @@ public class BackyardWeddingAPI {
 	}
 	
 	@PutMapping(value="/updatebackyard")
-	public ResponseEntity<BackyardDTO> updateBackyard (@RequestBody BackyardDTO backyardDto) throws BackyardWeddingException {
-		BackyardDTO dto = backyardWeddingService.updateBackyard(backyardDto);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
+	public ResponseEntity<String> updateBackyard (@RequestBody BackyardDTO backyardDto) throws BackyardWeddingException {
+		backyardWeddingService.updateBackyard(backyardDto);
+    String successMsg = "Backyard successfully updated at backyardId " + backyardDto.getBackyardId();
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/deletebackyard/{backyardId}")
-	public ResponseEntity<String> deleteBackyard (@PathVariable("backyardId") Integer backyardId) throws BackyardWeddingException {
-		String thing = backyardWeddingService.deleteBackyard(backyardId);
-		return new ResponseEntity<>(thing, HttpStatus.OK);
+	@DeleteMapping(value="/deletebackyard")
+	public ResponseEntity<String> deleteBackyard (@RequestBody BackyardDTO backyardDto) throws BackyardWeddingException {
+		String successMsg = backyardWeddingService.deleteBackyard(backyardDto.getBackyardId());
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
-	
-	
 }

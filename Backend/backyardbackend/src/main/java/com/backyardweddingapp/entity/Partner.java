@@ -1,12 +1,16 @@
 package com.backyardweddingapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,8 +36,20 @@ public class Partner {
 
 	@Column(name="city")
 	private String city;
+
+  // TODO: attempt to debug deleteBackyardFromPartner fails
+  // @OneToMany(cascade=CascadeType.ALL)
+  // @JoinColumn(name="partner_id")
+  // private List<Backyard> listOfBackyards;
 	
-	public int getPartnerId() {
+	// public List<Backyard> getListOfBackyards() {
+  //   return listOfBackyards;
+  // }
+  // public void setListOfBackyards(List<Backyard> listOfBackyards) {
+  //   this.listOfBackyards = listOfBackyards;
+  // }
+
+  public int getPartnerId() {
 		return partnerId;
 	}
 	public void setPartnerId(int partnerId) {
@@ -69,7 +85,5 @@ public class Partner {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-
 
 }

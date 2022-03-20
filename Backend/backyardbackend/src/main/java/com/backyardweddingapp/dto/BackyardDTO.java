@@ -8,7 +8,9 @@ public class BackyardDTO {
 	private String backyardName;
 	private int squareFootage;
 	private String city;
+
 	private Partner partner;
+  
 	private String description;
 	private String backyardImage;
 	

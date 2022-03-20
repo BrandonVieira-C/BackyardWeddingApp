@@ -1,10 +1,14 @@
 package com.backyardweddingapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +30,18 @@ public class Customer {
 
   @Column(name="city")
 	private String city;
+
+  // @OneToMany(cascade=CascadeType.ALL)
+  // @JoinColumn(name="customer_email")
+  // private List<Event> events;
 		
-	public String getCustomerEmail() {
+	// public List<Event> getEvents() {
+  //   return events;
+  // }
+  // public void setEvents(List<Event> events) {
+  //   this.events = events;
+  // }
+  public String getCustomerEmail() {
     return customerEmail;
   }
   public void setCustomerEmail(String customerEmail) {
