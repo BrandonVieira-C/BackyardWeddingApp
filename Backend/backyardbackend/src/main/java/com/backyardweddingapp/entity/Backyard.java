@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,10 @@ public class Backyard {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="partner_id")
 	private Partner partner;
+
+  @OneToOne(cascade=CascadeType.ALL)
+  @JoinColumn(name="event_id")
+  private Event event;
 
   @Column(name="description")
 	private String description;
@@ -78,6 +83,13 @@ public class Backyard {
   public void setPartner(Partner partner) {
     this.partner = partner;
   }
+  public Event getEvent() {
+    return event;
+  }
+  public void setEvent(Event event) {
+    this.event = event;
+  }
 
   
+
 }
