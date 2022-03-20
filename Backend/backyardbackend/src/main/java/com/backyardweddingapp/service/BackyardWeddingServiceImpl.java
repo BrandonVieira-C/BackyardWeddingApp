@@ -131,17 +131,12 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
   }
 
   public void deleteEvent(Integer eventId) throws BackyardWeddingException {
-
     //TODO: bug here. we need to first delete customer and backyard, and then we are allowed to delete event.
 
     Event event = eventRepository.findById(eventId).orElseThrow(
       () -> new BackyardWeddingException("SERVICE ERROR: Could not find event with that eventId."));
 
     // List<Event> listOfEvents = event.get // need to add a list in entity?
-
-
-
-
     
     customerRepository.delete(event.getCustomer());
     backyardRepository.delete(event.getBackyard());
@@ -156,18 +151,19 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 	@Override
 	public Integer addPartner (PartnerDTO partnerDTO) throws BackyardWeddingException {	
 		Partner partner = new Partner();
+    partner.setFirstName(partnerDTO.getFirstName());
+    partner.setLastName(partnerDTO.getLastName());
 		partner.setCity(partnerDTO.getCity());
 		partner.setDob(partnerDTO.getDob());
 		partner.setEmail(partnerDTO.getEmail());
-		partner.setFirstName(partnerDTO.getFirstName());
-		partner.setLastName(partnerDTO.getLastName());
 		
 		Partner partnerNewId = partnerRepository.save(partner);	
 		return partnerNewId.getPartnerId();	
 	}
 	
 	public PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException {
-		Partner partner = partnerRepository.findById(partnerId).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
+		Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
 		
 		PartnerDTO dto = new PartnerDTO();
 		dto.setCity(partner.getCity());
@@ -180,20 +176,24 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 	}
 	
 	public PartnerDTO updatePartner(PartnerDTO partnerDto) throws BackyardWeddingException {
+		Partner partnerContainer = partnerRepository.findById(partnerDto.getPartnerId()).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
 
-		Partner partner = partnerRepository.findById(partnerDto.getPartnerId()).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
-		partner.setCity(partnerDto.getCity());
-		partner.setDob(partnerDto.getDob());
-		partner.setEmail(partnerDto.getEmail());
-		partner.setFirstName(partnerDto.getFirstName());
-		partner.setLastName(partnerDto.getLastName());	
-		return partnerDto;	
+		partnerContainer.setCity(partnerDto.getCity());
+		partnerContainer.setDob(partnerDto.getDob());
+		partnerContainer.setEmail(partnerDto.getEmail());
+		partnerContainer.setFirstName(partnerDto.getFirstName());
+		partnerContainer.setLastName(partnerDto.getLastName());
+		return partnerDto;	//TODO: bug here. why return partnerDto...
 	}
-	
-	public String deletePartner(Integer partnerId) throws BackyardWeddingException {
 
-		Partner partner = partnerRepository.findById(partnerId).orElseThrow(() -> new BackyardWeddingException("Partner not found."));
-		List<Backyard> backyards = backyardRepository.findByPartner(partnerId).orElseThrow(() -> new BackyardWeddingException("Backyard not found."));
+	// TODO: Bug. unable to delete partner. what should error message be for list-backyard?
+	public String deletePartner(Integer partnerId) throws BackyardWeddingException {
+		Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+		List<Backyard> backyards = backyardRepository.findByPartner(partnerId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyardBackyard not found."));
+
 		for (Backyard b : backyards) {
 			backyardRepository.delete(b);
 		}
@@ -210,30 +210,28 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		backyard.setSquareFootage(backyardDto.getSquareFootage());
 		backyard.setDescription(backyardDto.getDescription());	
 		backyard.setBackyardImage(backyardDto.getBackyardImage());
-		
-		Partner partner = new Partner();
-		partner.setCity(backyardDto.getPartner().getCity());
-		partner.setDob(backyardDto.getPartner().getDob());
-		partner.setEmail(backyardDto.getPartner().getEmail());
-		partner.setFirstName(backyardDto.getPartner().getFirstName());
-		partner.setLastName(backyardDto.getPartner().getLastName());
-		partner.setPartnerId(backyardDto.getPartner().getPartnerId());
-		// backyard.setPartner(partner);
-		
+
+    Partner partnerContainer = partnerRepository.findById(backyardDto.getPartner().getPartnerId()).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+
+    backyard.setPartner(partnerContainer);		
 		Backyard backyard2 = backyardRepository.save(backyard);	
 		return backyard2.getBackyardId();
 	}
-	
+
+	@Override
 	public BackyardDTO getBackyard(Integer backyardId) throws BackyardWeddingException {
-		Backyard backyard = backyardRepository.findById(backyardId)
-				.orElseThrow(() -> new BackyardWeddingException("Cannot find that backyard ID."));
+		Backyard backyard = backyardRepository.findById(backyardId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
 		
 		BackyardDTO dto = new BackyardDTO();
+    dto.setBackyardId(backyard.getBackyardId());
 		dto.setBackyardName(backyard.getBackyardName());
 		dto.setCity(backyard.getCity());
-		// dto.setPartner(backyard.getPartner());
 		dto.setSquareFootage(backyard.getSquareFootage());
 		dto.setDescription(backyard.getDescription());
+
+    dto.setPartner(backyard.getPartner());
 		return dto;
 	}
 	
@@ -256,24 +254,25 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		return dtoArray;
 	}
 
-	public BackyardDTO updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException {
-		Backyard entity = backyardRepository.findById(backyardDto.getBackyardId())
-				.orElseThrow(() -> new BackyardWeddingException("Cannot find that backyard ID."));
+  // NOTE: will not be able to update partner here. 
+	public void updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException {
+		Backyard backyardContainer = backyardRepository.findById(backyardDto.getBackyardId()).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
 		
-		entity.setBackyardId(backyardDto.getBackyardId());
-		entity.setBackyardImage(backyardDto.getBackyardImage());
-		entity.setBackyardName(backyardDto.getBackyardName());
-		entity.setCity(backyardDto.getCity());
-		// entity.setPartner(backyardDto.getPartner());
-		entity.setDescription(backyardDto.getDescription());
-		entity.setSquareFootage(backyardDto.getSquareFootage());
-		backyardRepository.save(entity);
-		return backyardDto;
+    backyardContainer.setBackyardId(backyardDto.getBackyardId());
+		backyardContainer.setBackyardImage(backyardDto.getBackyardImage());
+		backyardContainer.setBackyardName(backyardDto.getBackyardName());
+		backyardContainer.setCity(backyardDto.getCity());
+		backyardContainer.setDescription(backyardDto.getDescription());
+		backyardContainer.setSquareFootage(backyardDto.getSquareFootage());
+
+		backyardRepository.save(backyardContainer);
+		return;
 	}
 	
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException {
-		Backyard backyard = backyardRepository.findById(backyardId)
-				.orElseThrow(() -> new BackyardWeddingException("Cannot find that backyard ID."));
+		Backyard backyard = backyardRepository.findById(backyardId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
 		
 		backyardRepository.delete(backyard);	
 		return "Backyard deleted.";

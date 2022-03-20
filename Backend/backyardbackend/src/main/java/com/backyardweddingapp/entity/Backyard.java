@@ -72,5 +72,12 @@ public class Backyard {
 	public void setCity(String city) {
 		this.city = city;
 	}
+  public Partner getPartner() {
+    return partner;
+  }
+  public void setPartner(Partner partner) {
+    this.partner = partner;
+  }
 
+  
 }
