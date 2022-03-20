@@ -25,28 +25,17 @@ public interface BackyardWeddingService {
 	void updateEvent(EventDTO eventDTO) throws BackyardWeddingException;
 	void deleteEvent(Integer eventId) throws BackyardWeddingException;
 
-	
 	//partner CRUD methods
-	
 	public Integer addPartner (PartnerDTO partnerDTO) throws BackyardWeddingException;
-	
 	public PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException;
-	
 	public PartnerDTO updatePartner(PartnerDTO partnerDto) throws BackyardWeddingException;
-	
 	public String deletePartner(Integer partnerId) throws BackyardWeddingException;
 	
 	//backyard CRUD methods
-	
 	public Integer addBackyard (BackyardDTO backyardDto) throws BackyardWeddingException;
-	
 	public BackyardDTO getBackyard(Integer backyardId) throws BackyardWeddingException;
-	
 	public List<BackyardDTO> getBackyardsByCity(String city) throws BackyardWeddingException;
-	
-	public BackyardDTO updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException;
-	
+	void updateBackyard(BackyardDTO backyardDto) throws BackyardWeddingException;
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException;
 
-	
 }

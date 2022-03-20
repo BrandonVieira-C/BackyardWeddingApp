@@ -37,18 +37,17 @@ public class Partner {
 	@Column(name="city")
 	private String city;
 
-  // TODO: attempt to debug deleteBackyardFromPartner fails
-  // @OneToMany(cascade=CascadeType.ALL)
-  // @JoinColumn(name="partner_id")
-  // private List<Backyard> listOfBackyards;
-	
-	// public List<Backyard> getListOfBackyards() {
-  //   return listOfBackyards;
-  // }
-  // public void setListOfBackyards(List<Backyard> listOfBackyards) {
-  //   this.listOfBackyards = listOfBackyards;
-  // }
 
+  @OneToMany(cascade=CascadeType.ALL)
+  @JoinColumn(name="partner_id")
+  private List<Backyard> listOfBackyards;
+	
+	public List<Backyard> getListOfBackyards() {
+    return listOfBackyards;
+  }
+  public void setListOfBackyards(List<Backyard> listOfBackyards) {
+    this.listOfBackyards = listOfBackyards;
+  }
   public int getPartnerId() {
 		return partnerId;
 	}
