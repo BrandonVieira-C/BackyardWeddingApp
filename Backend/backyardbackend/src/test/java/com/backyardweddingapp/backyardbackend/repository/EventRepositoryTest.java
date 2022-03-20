@@ -24,6 +24,7 @@ public class EventRepositoryTest {
 
   @BeforeEach
   void setUp() {
+    //note: you cannot set eventId (why?) it is autoset to 1
     event = new Event();
     event.setAmountPaid(999);
     event.setDateOfEvent(LocalDate.now());
@@ -36,6 +37,17 @@ public class EventRepositoryTest {
     Backyard backyard = new Backyard();
     backyard.setBackyardName("popeyes");
     event.setBackyard(backyard);
+  }
+
+  @Test
+  void deleteEventValidTest(){
+    eventRepository.save(event);
+    Optional<Event> eventContainer1 = eventRepository.findById(1);
+    Assertions.assertTrue(eventContainer1.isPresent());
+
+    eventRepository.delete(event);
+    Optional<Event> eventContainer2 = eventRepository.findById(1);
+    Assertions.assertTrue(eventContainer2.isEmpty());
   }
 
   @Test

@@ -38,12 +38,12 @@ public class BackyardWeddingAPI {
   public String helloWorld() {
     return helloService.sayHello();
   }
-	
-	//customer CRUD methods
+
+  // ------------------------------------------------------------------------------------------------------------------------------
 	@PostMapping(value="/addcustomer")
 	public ResponseEntity<String> addCustomer (@RequestBody CustomerDTO customerDTO) throws BackyardWeddingException {
-		backyardWeddingService.addCustomer(customerDTO);	
-    String successMsg = "Customer successfully added: " + customerDTO.getCustomerEmail();
+		String customerEmail = backyardWeddingService.addCustomer(customerDTO);	
+    String successMsg = "Customer successfully added: " + customerEmail;
 		return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
 	}	
 	
@@ -66,6 +66,35 @@ public class BackyardWeddingAPI {
     String successMsg = "Customer successfully deleted: " + customerDTO.getCustomerEmail(); //potential bug here?
 		return new ResponseEntity<>(successMsg, HttpStatus.OK);
 	}
+
+  // ------------------------------------------------------------------------------------------------------------------------------
+	@PostMapping(value="/addevent")
+	public ResponseEntity<String> addEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
+		Integer eventId = backyardWeddingService.addEvent(eventDTO);
+		String successMessage = "Your event has been created with new event id: "+ eventId;
+		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(value="/getevent")
+	public ResponseEntity<EventDTO> getEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {
+		EventDTO dto = backyardWeddingService.getEvent(eventDTO.getEventId());
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/updateevent")
+	public ResponseEntity<String> updateEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {
+		backyardWeddingService.updateEvent(eventDTO);
+    String successMsg = "Event sucessfully updated: " + eventDTO.getEventId();
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value="/deleteevent")
+	public ResponseEntity<String> deleteEvent (@RequestBody EventDTO eventDTO) throws BackyardWeddingException {
+		backyardWeddingService.deleteEvent(eventDTO.getEventId());
+    String successMsg = "Event successfully deleted: " + eventDTO.getEventId();
+		return new ResponseEntity<>(successMsg, HttpStatus.OK);
+	}
+
 	
 	//partner CRUD methods
 	@PostMapping(value="/addpartner")
@@ -125,34 +154,5 @@ public class BackyardWeddingAPI {
 		return new ResponseEntity<>(thing, HttpStatus.OK);
 	}
 	
-	//event CRUD methods
-	@PostMapping(value="/addevent/{backyardId}/{customerEmail}")
-	public ResponseEntity<String> addEvent (
-        @PathVariable("backyardId") Integer backyardId,
-        @PathVariable("customerEmail") String customerEmail, 
-        @RequestBody EventDTO eventDTO) throws BackyardWeddingException {	
-
-		EventDTO dto = backyardWeddingService.addEvent(customerEmail, backyardId, eventDTO);
-		String successMessage = "Your event has been created with new event id: "+ dto.getEventId();
-		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
-	}
 	
-	@GetMapping(value="/getevent/{eventId}")
-	public ResponseEntity<EventDTO> getEvent (@PathVariable("eventId") Integer eventId) throws BackyardWeddingException {
-		EventDTO dto = backyardWeddingService.getEvent(eventId);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
-	}
-	
-	@PutMapping(value="/updateevent")
-	public ResponseEntity<EventDTO> updateEvent (@RequestBody EventDTO eventDto) throws BackyardWeddingException {
-		EventDTO dto = backyardWeddingService.updateEvent(eventDto);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
-	}
-	
-	@DeleteMapping(value="/deleteevent/{eventId}")
-	public ResponseEntity<String> deleteEvent (@PathVariable("eventId") Integer eventId) throws BackyardWeddingException {
-		String thing = backyardWeddingService.deleteEvent(eventId);
-		return new ResponseEntity<>(thing, HttpStatus.OK);
-	}
-
 }

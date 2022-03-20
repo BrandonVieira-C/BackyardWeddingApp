@@ -20,10 +20,10 @@ public interface BackyardWeddingService {
 	void deleteCustomer(String customerEmail) throws BackyardWeddingException;
 
   //event CRUD methods
-	public EventDTO addEvent(String customerEmail, Integer backyardId, EventDTO eventDto) throws BackyardWeddingException;
-	public EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
-	public EventDTO updateEvent(EventDTO eventDto) throws BackyardWeddingException;
-	public String deleteEvent(Integer eventId) throws BackyardWeddingException;
+	Integer addEvent(EventDTO eventDTO) throws BackyardWeddingException;
+	EventDTO getEvent(Integer eventId) throws BackyardWeddingException;
+	void updateEvent(EventDTO eventDTO) throws BackyardWeddingException;
+	void deleteEvent(Integer eventId) throws BackyardWeddingException;
 
 	
 	//partner CRUD methods
