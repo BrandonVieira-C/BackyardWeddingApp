@@ -17,6 +17,7 @@ import com.backyardweddingapp.entity.Backyard;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 import com.backyardweddingapp.repository.BackyardRepository;
 import com.backyardweddingapp.service.BackyardWeddingServiceImpl;
+
 @SpringBootTest
 public class BackyardServiceTest {
 	

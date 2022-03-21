@@ -37,7 +37,7 @@ public class Partner {
 	@Column(name="city")
 	private String city;
 
-
+  // one partner has many events
   @OneToMany(cascade=CascadeType.ALL)
   @JoinColumn(name="partner_id")
   private List<Backyard> listOfBackyards;

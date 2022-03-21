@@ -8,16 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-//test change on main
+
 @Entity
 @Table(name="backyard")
 public class Backyard {
-	@Id
+
+  @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int backyardId;
-  
+
   @Column(name="backyard_name")
 	private String backyardName;
 
@@ -27,20 +27,22 @@ public class Backyard {
   @Column(name="city")
 	private String city;
 
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="partner_id")
-	private Partner partner;
-
-  @OneToOne(cascade=CascadeType.ALL)
-  @JoinColumn(name="event_id")
-  private Event event;
-
   @Column(name="description")
 	private String description;
 
   @Column(name="backyard_image")
 	private String backyardImage;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "partner_id")
+	private Partner partner;
+	
+	public Partner getPartner() {
+		return partner;
+	}
+	public void setPartner(Partner partner) {
+		this.partner = partner;
+	}
 	public String getBackyardImage() {
 		return backyardImage;
 	}
@@ -77,19 +79,5 @@ public class Backyard {
 	public void setCity(String city) {
 		this.city = city;
 	}
-  public Partner getPartner() {
-    return partner;
-  }
-  public void setPartner(Partner partner) {
-    this.partner = partner;
-  }
-  public Event getEvent() {
-    return event;
-  }
-  public void setEvent(Event event) {
-    this.event = event;
-  }
-
-  
 
 }
