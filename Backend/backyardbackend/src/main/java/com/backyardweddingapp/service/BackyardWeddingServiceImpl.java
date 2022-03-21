@@ -264,29 +264,29 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 	}
 	
 	public String deleteBackyard(Integer backyardId) throws BackyardWeddingException {
-		Backyard backyardContainer = backyardRepository.findById(backyardId).orElseThrow(
-      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
-
-    Partner partnerContainer = partnerRepository.findById(backyardContainer.getPartner().getPartnerId()).orElseThrow(
-      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
-
-    List<Backyard> listOfBackyards = backyardContainer.getPartner().getListOfBackyards();
-    Backyard backyardToRemove = null;
-
-    for(Backyard currentBackyard : listOfBackyards) {
-      if(backyardId.equals(currentBackyard.getBackyardId())){
-        backyardToRemove = currentBackyard;
-        break;
-      }
-    }
-    // backyard -> partner
-    listOfBackyards.remove(backyardToRemove);
-    partnerContainer.setListOfBackyards(listOfBackyards);
-		
-    // Optional<Backyard> deletedPartnerBackyard = backyardRepository.findById(backyardId);
-    // Backyard nulledPartnerBackyard = deletedPartnerBackyard.orElseThrow(
+		// Backyard backyardContainer = backyardRepository.findById(backyardId).orElseThrow(
     //   () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
-		// backyardRepository.delete(nulledPartnerBackyard);	
+
+    // Partner partnerContainer = partnerRepository.findById(backyardContainer.getPartner().getPartnerId()).orElseThrow(
+    //   () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+
+    // List<Backyard> listOfBackyards = backyardContainer.getPartner().getListOfBackyards();
+    // Backyard backyardToRemove = null;
+
+    // for(Backyard currentBackyard : listOfBackyards) {
+    //   if(backyardId.equals(currentBackyard.getBackyardId())){
+    //     backyardToRemove = currentBackyard;
+    //     break;
+    //   }
+    // }
+    // // backyard -> partner
+    // listOfBackyards.remove(backyardToRemove);
+    // partnerContainer.setListOfBackyards(listOfBackyards);
+		
+    Optional<Backyard> deletedPartnerBackyard = backyardRepository.findById(backyardId);
+    Backyard nulledPartnerBackyard = deletedPartnerBackyard.orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
+		backyardRepository.delete(nulledPartnerBackyard);	
 		return "Backyard deleted.";
 	}	
 }
