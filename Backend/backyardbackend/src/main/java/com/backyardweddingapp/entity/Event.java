@@ -2,14 +2,11 @@ package com.backyardweddingapp.entity;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,60 +15,53 @@ public class Event {
 
 	@Id
   @Column(name="event_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY) //this allows information transmittion from db to entity.
-	private int eventId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	private Integer eventId;
 
-  @Column(name="amount_paid")
-	private int amountPaid;
+  @Column(name="event_name")
+	private String eventName;
 
-  @Column(name="date_of_event")
-	private LocalDate dateOfEvent;
+  @Column(name="event_date")
+	private LocalDate eventDate;
 
-  @OneToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="customer_email")
-	private Customer customer;
+  @Column(name="backyard_id")
+  private Integer backyardId;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="backyard_id")
-	private Backyard backyard;
-	
-	public int getEventId() {
-		return eventId;
-	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public int getAmountPaid() {
-		return amountPaid;
-	}
-	public void setAmountPaid(int amountPaid) {
-		this.amountPaid = amountPaid;
-	}
-	public LocalDate getDateOfEvent() {
-		return dateOfEvent;
-	}
-	public void setDateOfEvent(LocalDate dateOfEvent) {
-		this.dateOfEvent = dateOfEvent;
-	}
-  
-  public Backyard getBackyard() {
-    return backyard;
+  // -----------------------------------------------------------------------------------------------------------
+
+  public Integer getEventId() {
+    return eventId;
   }
-  public void setBackyard(Backyard backyard) {
-    this.backyard = backyard;
+
+  public void setEventId(Integer eventId) {
+    this.eventId = eventId;
   }
-  
-  @Override
-  public String toString() {
-    return "Event [amountPaid=" + amountPaid + ", backyard=" + backyard + ", customer=" + customer + ", dateOfEvent="
-        + dateOfEvent + ", eventId=" + eventId + "]";
+
+  public String getEventName() {
+    return eventName;
   }
+
+  public void setEventName(String eventName) {
+    this.eventName = eventName;
+  }
+
+  public LocalDate getEventDate() {
+    return eventDate;
+  }
+
+  public void setEventDate(LocalDate eventDate) {
+    this.eventDate = eventDate;
+  }
+
+  public Integer getBackyardId() {
+    return backyardId;
+  }
+
+  public void setBackyardId(Integer backyardId) {
+    this.backyardId = backyardId;
+  }
+
 
 
 }
+

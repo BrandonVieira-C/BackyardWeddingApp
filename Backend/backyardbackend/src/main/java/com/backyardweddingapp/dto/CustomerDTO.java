@@ -1,48 +1,40 @@
 package com.backyardweddingapp.dto;
 
-import java.time.LocalDate;
+import java.util.List;
 
 public class CustomerDTO {
 
-  private String customerEmail;
-
-	private String firstName;
-	private String lastName;
-	private LocalDate dob;
-	private String city;
-	
-	public String getCustomerEmail() {
-    return customerEmail;
+  private Integer customerId;
+  private String firstName;
+  private String lastName;
+  private List<EventDTO> customerEvents;
+  
+  // -----------------------------------------------------------------------------------------------------------
+  public Integer getCustomerId() {
+    return customerId;
   }
-  public void setCustomerEmail(String customerEmail) {
-    this.customerEmail = customerEmail;
+  public void setCustomerId(Integer customerId) {
+    this.customerId = customerId;
   }
   public String getFirstName() {
+    return firstName;
+  }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+  public String getLastName() {
+    return lastName;
+  }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+  public List<EventDTO> getCustomerEvents() {
+    return customerEvents;
+  }
+  public void setCustomerEvents(List<EventDTO> customerEvents) {
+    this.customerEvents = customerEvents;
+  }
 
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public LocalDate getDob() {
-		return dob;
-	}
-	public void setDob(LocalDate string) {
-		this.dob = string;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	
-	
 
+  
 }

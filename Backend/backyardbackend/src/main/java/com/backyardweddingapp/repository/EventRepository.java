@@ -1,11 +1,11 @@
 package com.backyardweddingapp.repository;
 
-import com.backyardweddingapp.entity.Partner;
+import com.backyardweddingapp.entity.Event;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PartnerRepository extends CrudRepository<Partner, Integer> {
+public interface EventRepository extends CrudRepository<Event, Integer>{
   
 }

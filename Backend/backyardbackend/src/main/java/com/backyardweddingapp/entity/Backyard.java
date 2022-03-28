@@ -1,13 +1,10 @@
 package com.backyardweddingapp.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,69 +12,72 @@ import javax.persistence.Table;
 public class Backyard {
 
   @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int backyardId;
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="backyard_id")
+  private Integer backyardId;
 
-  @Column(name="backyard_name")
-	private String backyardName;
+  @Column(name="backyard_description")
+  private String backyardDescription;
 
-  @Column(name="square_footage")
-	private int squareFootage;
+  @Column(name="backyard_rating")
+  private Integer backyardRating;
 
-  @Column(name="city")
-	private String city;
+  @Column(name="backyard_city")
+  private String backyardCity;
 
-  @Column(name="description")
-	private String description;
+  @Column(name="backyard_cost")
+  private Integer backyardCost;
 
-  @Column(name="backyard_image")
-	private String backyardImage;
+  @Column(name="partner_id")
+  private Integer partnerId;
+  // -----------------------------------------------------------------------------------------------------------
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "partner_id")
-	private Partner partner;
-	
-	public Partner getPartner() {
-		return partner;
-	}
-	public void setPartner(Partner partner) {
-		this.partner = partner;
-	}
-	public String getBackyardImage() {
-		return backyardImage;
-	}
-	public void setBackyardImage(String backyardImage) {
-		this.backyardImage = backyardImage;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public int getBackyardId() {
-		return backyardId;
-	}
-	public void setBackyardId(int backyardId) {
-		this.backyardId = backyardId;
-	}
-	public String getBackyardName() {
-		return backyardName;
-	}
-	public void setBackyardName(String backyardName) {
-		this.backyardName = backyardName;
-	}
-	public int getSquareFootage() {
-		return squareFootage;
-	}
-	public void setSquareFootage(int squareFootage) {
-		this.squareFootage = squareFootage;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+  public Integer getBackyardId() {
+    return backyardId;
+  }
+
+  public void setBackyardId(Integer backyardId) {
+    this.backyardId = backyardId;
+  }
+
+  public String getBackyardDescription() {
+    return backyardDescription;
+  }
+
+  public void setBackyardDescription(String backyardDescription) {
+    this.backyardDescription = backyardDescription;
+  }
+
+  public Integer getBackyardRating() {
+    return backyardRating;
+  }
+
+  public void setBackyardRating(Integer backyardRating) {
+    this.backyardRating = backyardRating;
+  }
+
+  public String getBackyardCity() {
+    return backyardCity;
+  }
+
+  public void setBackyardCity(String backyardCity) {
+    this.backyardCity = backyardCity;
+  }
+
+  public Integer getBackyardCost() {
+    return backyardCost;
+  }
+
+  public void setBackyardCost(Integer backyardCost) {
+    this.backyardCost = backyardCost;
+  }
+
+  public Integer getPartnerId() {
+    return partnerId;
+  }
+
+  public void setPartnerId(Integer partnerId) {
+    this.partnerId = partnerId;
+  }
 
 }

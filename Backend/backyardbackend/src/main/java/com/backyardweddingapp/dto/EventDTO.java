@@ -2,55 +2,39 @@ package com.backyardweddingapp.dto;
 
 import java.time.LocalDate;
 
-import com.backyardweddingapp.entity.Backyard;
-import com.backyardweddingapp.entity.Customer;
-
 public class EventDTO {
 	
-	private int eventId;
-	private int amountPaid;
-	private LocalDate dateOfEvent;
-  
-  private Customer customer;
-  private Backyard backyard;
+  private Integer eventId;
+  private String eventName;
+  private LocalDate eventDate;
 
-	public int getEventId() {
-		return eventId;
-	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public int getAmountPaid() {
-		return amountPaid;
-	}
-	public void setAmountPaid(int amountPaid) {
-		this.amountPaid = amountPaid;
-	}
-	public LocalDate getDateOfEvent() {
-		return dateOfEvent;
-	}
-	public void setDateOfEvent(LocalDate dateOfEvent) {
-		this.dateOfEvent = dateOfEvent;
-	}
-  public Backyard getBackyard() {
-    return backyard;
-  }
-  public void setBackyard(Backyard backyard) {
-    this.backyard = backyard;
-  }
-  @Override
-  public String toString() {
-    return "EventDTO [amountPaid=" + amountPaid + ", backyard=" + backyard + ", customer=" + customer + ", dateOfEvent="
-        + dateOfEvent + ", eventId=" + eventId + "]";
-  }
+  // being used for adding events.
+  private Integer backyardId;
 
-	
-	
+  // -----------------------------------------------------------------------------------------------------------
 
+  public Integer getEventId() {
+    return eventId;
+  }
+  public void setEventId(Integer eventId) {
+    this.eventId = eventId;
+  }
+  public String getEventName() {
+    return eventName;
+  }
+  public void setEventName(String eventName) {
+    this.eventName = eventName;
+  }
+  public LocalDate getEventDate() {
+    return eventDate;
+  }
+  public void setEventDate(LocalDate eventDate) {
+    this.eventDate = eventDate;
+  }
+  public Integer getBackyardId() {
+    return backyardId;
+  }
+  public void setBackyardId(Integer backyardId) {
+    this.backyardId = backyardId;
+  }
 }

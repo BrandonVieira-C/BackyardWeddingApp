@@ -1,10 +1,15 @@
 package com.backyardweddingapp.entity;
 
-import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,8 +17,9 @@ import javax.persistence.Table;
 public class Customer {
   
 	@Id
-  @Column(name="customer_email")
-	private String customerEmail;
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="customer_id")
+	private Integer customerId;
 
   @Column(name="first_name")
 	private String firstName;
@@ -21,42 +27,43 @@ public class Customer {
   @Column(name="last_name")
 	private String lastName;
 
-  @Column(name="dob")
-	private LocalDate dob;
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name="customer_id")
+  private List<Event> events;
 
-  @Column(name="city")
-	private String city;
+  // -----------------------------------------------------------------------------------------------------------
 
-  public String getCustomerEmail() {
-    return customerEmail;
+  public Integer getCustomerId() {
+    return customerId;
   }
-  public void setCustomerEmail(String customerEmail) {
-    this.customerEmail = customerEmail;
+
+  public void setCustomerId(Integer customerId) {
+    this.customerId = customerId;
   }
+
   public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String first_name) {
-		this.firstName = first_name;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public LocalDate getDob() {
-		return dob;
-	}
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
+    return firstName;
+  }
 
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public List<Event> getEvents() {
+    return events;
+  }
+
+  public void setEvents(List<Event> events) {
+    this.events = events;
+  }
+
 
 }
