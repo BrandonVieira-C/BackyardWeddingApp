@@ -12,7 +12,7 @@ import { Backyard } from './objects/backyard';
 
 export class RESTService {
 
-  private baseUrl = 'http://localhost:8080/wedding';
+  private baseUrl = 'http://backyardwedding-env.eba-a9satvjy.us-east-1.elasticbeanstalk.com/wedding';
 
   constructor(private http: HttpClient) { }
 

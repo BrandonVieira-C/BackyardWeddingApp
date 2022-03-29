@@ -6,13 +6,13 @@
         "authProtocol": "default"
       },
       "previewLimit": 50,
-      "server": "localhost",
+      "server": "bwdb.cieyhvojvver.us-east-1.rds.amazonaws.com",
       "port": 3306,
       "driver": "MySQL",
-      "name": "bkah",
+      "name": "bwdb",
       "database": "backyardwedding_db",
       "username": "root",
-      "password": "root"
+      "password": "password"
     }
   ]
 }

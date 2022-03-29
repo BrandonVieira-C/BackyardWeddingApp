@@ -282,7 +282,6 @@ public class BackyardWeddingServiceImpl implements BackyardWeddingService {
 		entity.setBackyardImage(backyardDto.getBackyardImage());
 		entity.setBackyardName(backyardDto.getBackyardName());
 		entity.setCity(backyardDto.getCity());
-		entity.setPartner(backyardDto.getPartner());
 		entity.setDescription(backyardDto.getDescription());
 		entity.setSquareFootage(backyardDto.getSquareFootage());
 		backyardRepository.save(entity);

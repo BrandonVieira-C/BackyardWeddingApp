@@ -14,6 +14,7 @@ import com.backyardweddingapp.entity.Backyard;
 import com.backyardweddingapp.entity.Partner;
 import com.backyardweddingapp.exception.BackyardWeddingException;
 import com.backyardweddingapp.repository.BackyardRepository;
+import com.backyardweddingapp.repository.PartnerRepository;
 @DataJpaTest
 public class BackyardRepositoryTest {
 	
@@ -41,7 +42,6 @@ public class BackyardRepositoryTest {
 		partner.setPartnerId(3);
 		
 		yard1.setPartner(partner);
-		
 		yardfromDB = backyardRepo.save(yard1);
 		
 	}
@@ -50,6 +50,7 @@ public class BackyardRepositoryTest {
 	@Test
 	public void saveBackyardTest() throws BackyardWeddingException {
 		Assertions.assertEquals("Garden", yardfromDB.getBackyardName());
+
 		
 	}
 	
@@ -60,11 +61,16 @@ public class BackyardRepositoryTest {
 	}
 	
 	@Test
-	public void findByPartnerTest() {
-		Optional<List<Backyard>> listFromDB = backyardRepo.findByPartner(partner.getPartnerId());
-		boolean actual = (listFromDB != null);
-		boolean expected = true;
-		Assertions.assertEquals(actual, expected);
+	public void findByPartnerTest() throws BackyardWeddingException {
+		List<Backyard> listFromDB = backyardRepo.findByPartner(partner.getPartnerId()).orElseThrow(() -> new BackyardWeddingException("List is empty"));
+
+		for (Backyard b : listFromDB) {
+			if (b.getPartner().getPartnerId() != partner.getPartnerId()) {
+				throw new BackyardWeddingException("Method returned an invalid backyard");
+			}
+			
+		Assertions.assertNotNull(listFromDB);
+		}
 
 	}
 	
