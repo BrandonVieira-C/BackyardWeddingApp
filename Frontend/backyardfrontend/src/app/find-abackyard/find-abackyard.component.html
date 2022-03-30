@@ -1,0 +1,11 @@
+
+<div>   Find backyard by city:  <input [(ngModel)]='city'>
+    <button type="button" (click)='getBackyardsByCity(city)'>Search</button> 
+    <div *ngFor="let backyard of backyards">
+    <a [routerLink]="['/backyard', backyard.backyardId]">{{backyard.backyardName}}</a>  
+            {{backyard.city}}
+            {{backyard.address}}
+            {{backyard.squareFootage}}
+    </div>
+
+</div>

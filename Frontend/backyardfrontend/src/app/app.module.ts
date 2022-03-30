@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocationFilterPipe } from './pipes/location-filter';
 import { RESTService } from './REST.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FindABackyardComponent } from './find-abackyard/find-abackyard.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { CustomerRegisterComponent } from './customer-register/customer-register.component';
+import { PartnerRegisterComponent } from './partner-register/partner-register.component';
 
 
 @NgModule({
@@ -20,7 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
     BackyardClickedComponent,
     RegisterFormPageComponent,
     LoginPageComponent,
-    LocationFilterPipe
+    LocationFilterPipe,
+    FindABackyardComponent,
+    RegisterPageComponent,
+    CustomerRegisterComponent,
+    PartnerRegisterComponent
   ],
   imports: [
     BrowserModule,

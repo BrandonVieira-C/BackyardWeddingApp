@@ -10,30 +10,20 @@ import { RESTService } from '../REST.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  backyards!: Backyard[];
-  backyard!: Backyard;
-  city!: string;
+
+
   SearchCity!: string;
   customer!: Customer;
   customerId!: number;
 
 
-  constructor(private restService: RESTService) { }
+  constructor() { }
 
   ngOnInit(): void {
   
   }
 
-  getBackyardsByCity (city: string): void {
-    this.restService.getBackyards(city).subscribe(
-      (response: Backyard[]) => {
-        this.backyards = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
+  
 
   
 
