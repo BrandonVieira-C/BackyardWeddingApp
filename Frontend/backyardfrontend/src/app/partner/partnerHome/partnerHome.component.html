@@ -1,0 +1,23 @@
+partnerHome which will include <br>
+1) partner login <br>
+2) partner register <br>
+3) table of currently registered partners <br>
+
+<table class="table table-response text-center table-condensed">
+  <thead>
+    <tr>
+      <th>PartnerId</th>
+      <th>firstName</th>
+      <th>lastName</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let partner of partners">
+      <td>{{partner.partnerId}}</td>
+      <td>{{partner.firstName}}</td>
+      <td>{{partner.lastName}}</td>
+      <td>{{partner.partnerRating}}</td>
+    </tr>
+  </tbody>
+</table>
