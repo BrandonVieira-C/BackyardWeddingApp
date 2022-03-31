@@ -1,5 +1,7 @@
 package com.backyardweddingapp.api;
 
+import java.util.List;
+
 import com.backyardweddingapp.dto.BackyardDTO;
 import com.backyardweddingapp.dto.PartnerDTO;
 import com.backyardweddingapp.exception.BackyardWeddingException;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/wedding")
+@RequestMapping(value = "/partner-api")
 public class PartnerAPI {
 
   @Autowired
@@ -32,10 +34,18 @@ public class PartnerAPI {
     return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
   }
 
-  @GetMapping(value = "/getpartner")
-  public ResponseEntity<PartnerDTO> getPartnerWithId(@RequestBody PartnerDTO partnerDTO)
+  @GetMapping(value="/getallpartner")
+  public ResponseEntity<List<PartnerDTO>> getAllPartner() throws BackyardWeddingException {
+    List<PartnerDTO> partners = null;
+    partners = partnerService.getAllPartner();
+    return new ResponseEntity<>(partners, HttpStatus.OK);
+  }
+
+  // might need to change from @RequestBody to PathVariable
+  @GetMapping(value = "/getpartner/{partnerId}")
+  public ResponseEntity<PartnerDTO> getPartnerWithId(@PathVariable("partnerId")Integer partnerId)
       throws BackyardWeddingException {
-    PartnerDTO returned = partnerService.getPartner(partnerDTO.getPartnerId());
+    PartnerDTO returned = partnerService.getPartner(partnerId);
     return new ResponseEntity<PartnerDTO>(returned, HttpStatus.OK);
   }
 
@@ -47,10 +57,10 @@ public class PartnerAPI {
     return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
   }
 
-  @DeleteMapping(value = "/deletebackyard/{partnerId}")
-  public ResponseEntity<String> deleteBackyardForPartner(@PathVariable(name = "partnerId") Integer partnerId,
-      @RequestBody BackyardDTO backyardDTO) throws BackyardWeddingException {
-    String successMsg = partnerService.deleteBackyardForPartner(partnerId, backyardDTO.getBackyardId());
+  @DeleteMapping(value = "/deletebackyard")
+  public ResponseEntity<String> deleteBackyardForPartner(@RequestBody BackyardDTO backyardDTO)
+      throws BackyardWeddingException {
+    String successMsg = partnerService.deleteBackyard(backyardDTO.getBackyardId());
     return new ResponseEntity<>(successMsg, HttpStatus.OK);
   }
 

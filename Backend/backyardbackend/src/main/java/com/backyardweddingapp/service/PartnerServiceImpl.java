@@ -1,5 +1,6 @@
 package com.backyardweddingapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,24 @@ public class PartnerServiceImpl implements PartnerService {
   }
 
   @Override
+  public List<PartnerDTO> getAllPartner() throws BackyardWeddingException {
+    Iterable<Partner> partners = partnerRepository.findAll();
+    List<PartnerDTO> partnerDTOs = new ArrayList<>();
+    partners.forEach(entity -> {
+      PartnerDTO dto = new PartnerDTO();
+      dto.setPartnerId(entity.getPartnerId());
+      dto.setFirstName(entity.getFirstName());
+      dto.setLastName(entity.getLastName());
+      dto.setPartnerRating(entity.getPartnerRating());
+      // not setting partner backyard here?
+
+      partnerDTOs.add(dto);
+    });
+    return partnerDTOs;
+  }
+
+
+  @Override
   public Integer addBackyardForPartner(Integer partnerId, BackyardDTO backyardDTO) throws BackyardWeddingException {
     Partner partner = partnerRepository.findById(partnerId).orElseThrow(
         () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
@@ -85,15 +104,7 @@ public class PartnerServiceImpl implements PartnerService {
   }
 
   @Override
-  public String deleteBackyardForPartner(Integer partnerId, Integer backyardId) throws BackyardWeddingException {
-    Partner partner = partnerRepository.findById(partnerId).orElseThrow(
-        () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
-
-    // nulls partnerId in backyard table
-    List<Backyard> listOfPartnerBackyards = partner.getBackyards();
-    listOfPartnerBackyards.removeIf(backyard -> backyard.getBackyardId().equals(backyardId));
-    partner.setBackyards(listOfPartnerBackyards);
-    partnerRepository.save(partner);
+  public String deleteBackyard(Integer backyardId) throws BackyardWeddingException {
 
     Backyard backyard = backyardRepository.findById(backyardId).orElseThrow(
         () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
@@ -101,5 +112,6 @@ public class PartnerServiceImpl implements PartnerService {
 
     return "SERVICE: backyard removed successfully.";
   }
+
 
 }
