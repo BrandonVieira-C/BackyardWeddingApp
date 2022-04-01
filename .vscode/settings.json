@@ -1,0 +1,18 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "bwdb.cieyhvojvver.us-east-1.rds.amazonaws.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "bwdb",
+      "database": "backyardwedding_db",
+      "username": "root",
+      "password": "password"
+    }
+  ]
+}

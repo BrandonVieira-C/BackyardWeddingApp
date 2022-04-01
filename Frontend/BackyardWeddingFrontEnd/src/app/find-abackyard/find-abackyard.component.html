@@ -1,0 +1,38 @@
+<table border="1px" style="margin-left: 700px">    <button style="float:left;" routerLink="events">Your Events </button>
+    <thead>
+        <tr>
+            <th >
+                 Backyard ID 
+            </th>
+            <th> Description
+            </th>
+            <th>City</th>
+            <th> Rate </th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let backyard of backyards">
+        <tr>
+            <td><a [routerLink]="['/backyard', backyard.backyardId]">{{backyard.backyardId}}</a>  </td>
+
+            <td>{{backyard.backyardDescription}}</td>
+
+            <td>{{backyard.backyardCity}}</td>
+
+            <td>{{backyard.backyardCost}}</td>
+        </tr>       
+    </tbody>
+</table>
+
+
+
+
+<div>   Find backyard by city:  <input [(ngModel)]='city'>
+    <!-- <button type="button" (click)='getBackyardsByCity(city)'>Search</button>  -->
+    <div *ngFor="let backyard of backyards">
+    <a [routerLink]="['/backyard', backyard.backyardId]">{{backyard.backyardId}}</a>  
+            {{backyard.backyardCity}}
+            {{backyard.backyardCost}}
+            {{backyard.backyardRating}}
+    </div>
+
+</div>

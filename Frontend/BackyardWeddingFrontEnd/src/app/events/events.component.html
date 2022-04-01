@@ -1,0 +1,22 @@
+<!--  **SHOW LIST OF ALL EVENTS**
+    <thead>
+        <tr>
+            <th >
+                 Backyard ID 
+            </th>
+            <th> Description
+            </th>
+            <th>City</th>
+            <th> Rate </th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let event of events">
+        <tr>
+            <td><a [routerLink]="['/event', event.eventId]">{{event.eventName}}</a>  </td>
+
+            <td>{{event.eventDate}}</td>
+
+            <td>{{event.backyardId}}</td>
+        </tr>       
+    </tbody>
+</table> -->
