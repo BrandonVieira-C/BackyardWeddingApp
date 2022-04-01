@@ -2,22 +2,66 @@ partnerHome which will include <br>
 1) partner login <br>
 2) partner register <br>
 3) table of currently registered partners <br>
+<br>
 
-<table class="table table-response text-center table-condensed">
-  <thead>
-    <tr>
-      <th>PartnerId</th>
-      <th>firstName</th>
-      <th>lastName</th>
-      <th>rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let partner of partners">
-      <td>{{partner.partnerId}}</td>
-      <td>{{partner.firstName}}</td>
-      <td>{{partner.lastName}}</td>
-      <td>{{partner.partnerRating}}</td>
-    </tr>
-  </tbody>
-</table>
+<head>
+
+</head>
+
+<body>
+
+  <div class="container" id="main-container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">id#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partner of partnersInDB">
+              <th scope="row">{{partner.partnerId}}</th>
+              <td>{{partner.firstName}}</td>
+              <td>{{partner.lastName}}</td>
+              <td>
+                <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-danger" (click)="onDeletePartner(partner)"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card mt-5" style="padding: 20px">
+      <form [formGroup]="addPartnerForm" (ngSubmit)="onAddPartner()">
+        <div class="form-group">
+          <label>First Name: </label>
+          <input type="text" class="form-control" formControlName="firstName">
+        </div>
+        <div class="form-group">
+          <label>Last Name: </label>
+          <input type="text" class="form-control" formControlName="lastName">
+        </div>
+        <br>
+        <div class="form-group">
+          <input class="btn btn-success w-100" type="submit" value="Register">
+        </div>
+      </form>
+
+      <h5 class="success-message">success: {{successMsg}}</h5>
+      <h5 class="error-message">error: {{errMsg}}</h5>
+    </div>
+  </div>  
+
+</body>
+
+
+
+
+

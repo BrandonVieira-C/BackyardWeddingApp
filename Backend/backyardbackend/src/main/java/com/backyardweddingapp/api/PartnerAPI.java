@@ -41,7 +41,13 @@ public class PartnerAPI {
     return new ResponseEntity<>(partners, HttpStatus.OK);
   }
 
-  // might need to change from @RequestBody to PathVariable
+  @DeleteMapping(value="/deletepartner/{partnerId}")
+  public ResponseEntity<String> deletePartner(@PathVariable(name="partnerId") Integer partnerId) throws BackyardWeddingException {
+    String successMsg = partnerService.deletePartner(partnerId);
+    return new ResponseEntity<>(successMsg, HttpStatus.OK);
+  }
+
+
   @GetMapping(value = "/getpartner/{partnerId}")
   public ResponseEntity<PartnerDTO> getPartnerWithId(@PathVariable("partnerId")Integer partnerId)
       throws BackyardWeddingException {
@@ -57,10 +63,10 @@ public class PartnerAPI {
     return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
   }
 
-  @DeleteMapping(value = "/deletebackyard")
-  public ResponseEntity<String> deleteBackyardForPartner(@RequestBody BackyardDTO backyardDTO)
+  @DeleteMapping(value = "/deletebackyard/{partnerId}")
+  public ResponseEntity<String> deleteBackyardForPartner(@PathVariable(name="partnerId") Integer partnerId)
       throws BackyardWeddingException {
-    String successMsg = partnerService.deleteBackyard(backyardDTO.getBackyardId());
+    String successMsg = partnerService.deleteBackyard(partnerId);
     return new ResponseEntity<>(successMsg, HttpStatus.OK);
   }
 

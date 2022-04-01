@@ -66,6 +66,7 @@ public class PartnerServiceImpl implements PartnerService {
   @Override
   public List<PartnerDTO> getAllPartner() throws BackyardWeddingException {
     Iterable<Partner> partners = partnerRepository.findAll();
+    
     List<PartnerDTO> partnerDTOs = new ArrayList<>();
     partners.forEach(entity -> {
       PartnerDTO dto = new PartnerDTO();
@@ -78,6 +79,15 @@ public class PartnerServiceImpl implements PartnerService {
       partnerDTOs.add(dto);
     });
     return partnerDTOs;
+  }
+
+  @Override
+  public String deletePartner(Integer partnerId) throws BackyardWeddingException {
+    Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+
+    partnerRepository.delete(partner);
+    return "SERVICE: partner deleted successfully." ;
   }
 
 
@@ -105,13 +115,15 @@ public class PartnerServiceImpl implements PartnerService {
 
   @Override
   public String deleteBackyard(Integer backyardId) throws BackyardWeddingException {
-
     Backyard backyard = backyardRepository.findById(backyardId).orElseThrow(
         () -> new BackyardWeddingException("SERVICE ERROR: Could not find backyard with that backyardId."));
+
     backyardRepository.delete(backyard);
 
     return "SERVICE: backyard removed successfully.";
   }
+
+
 
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { Partner } from "src/app/shared/entity/Partner";
 import { environment } from "src/environments/environment";
@@ -10,6 +10,7 @@ import { environment } from "src/environments/environment";
 })
 
 export class PartnerHomeService {
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' }) // for passing err/success message from backend to html
 
   constructor(private http: HttpClient) { }
 
@@ -44,13 +45,24 @@ export class PartnerHomeService {
 
   public getAllPartner(): Observable<Partner[]> {
     let url: string = environment.partnerApiUrl + "/getallpartner";
-    return this.http.get<Partner[]>(url).pipe(catchError(this.handleError))
+    return this.http.get<Partner[]>(url);
   }
 
-  public getPartnerById(partnerId: number):Observable<Partner> {
-    let url: string = environment.partnerApiUrl+'/getpartner/'+partnerId;
+  public addPartner(partner: Partner): Observable<string> { //return type string to allow success/err messages to be passed
+    let url: string = environment.partnerApiUrl + '/addpartner'
+    return this.http.post<string>(url, partner, { headers: this.headers, responseType: 'text' as 'json' });
+  }
+
+  public deletePartner(partnerId: number): Observable<string> {
+    let url: string = environment.partnerApiUrl + '/deletepartner/' + partnerId;
+    return this.http.delete<string>(url, { headers: this.headers, responseType: 'text' as 'json' });
+  }
+
+  public getPartnerById(partnerId: number): Observable<Partner> {
+    let url: string = environment.partnerApiUrl + '/getpartner/' + partnerId;
     return this.http.get<Partner>(url);
   }
+
 
   // public addPartner(partner: Partner): Observable<Partner> {
   //   return this.http.post<Partner>(`${this.apiServerUrl}/addpartner`, partner);

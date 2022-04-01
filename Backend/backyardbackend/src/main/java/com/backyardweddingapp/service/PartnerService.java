@@ -9,6 +9,7 @@ import com.backyardweddingapp.exception.BackyardWeddingException;
 public interface PartnerService {
   Integer addPartner(PartnerDTO partnerDTO) throws BackyardWeddingException; //returns newly added partnerId
   PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException;
+  String deletePartner(Integer partnerId) throws BackyardWeddingException;
 
   List<PartnerDTO> getAllPartner() throws BackyardWeddingException;
 
