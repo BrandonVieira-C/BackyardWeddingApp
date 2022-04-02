@@ -27,18 +27,18 @@ public class PartnerAPI {
   @Autowired
   PartnerService partnerService;
 
-  @PostMapping(value = "/addpartner")
-  public ResponseEntity<String> addCustomer(@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
-    Integer newPartnerId = partnerService.addPartner(partnerDTO);
-    String successMsg = "New partner added with new partnerId: " + newPartnerId;
-    return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
-  }
-
   @GetMapping(value="/getallpartner")
   public ResponseEntity<List<PartnerDTO>> getAllPartner() throws BackyardWeddingException {
     List<PartnerDTO> partners = null;
     partners = partnerService.getAllPartner();
     return new ResponseEntity<>(partners, HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/addpartner")
+  public ResponseEntity<String> addCustomer(@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
+    Integer newPartnerId = partnerService.addPartner(partnerDTO);
+    String successMsg = "New partner added with new partnerId: " + newPartnerId;
+    return new ResponseEntity<>(successMsg, HttpStatus.CREATED);
   }
 
   @DeleteMapping(value="/deletepartner/{partnerId}")
@@ -47,13 +47,19 @@ public class PartnerAPI {
     return new ResponseEntity<>(successMsg, HttpStatus.OK);
   }
 
-
-  @GetMapping(value = "/getpartner/{partnerId}")
-  public ResponseEntity<PartnerDTO> getPartnerWithId(@PathVariable("partnerId")Integer partnerId)
-      throws BackyardWeddingException {
-    PartnerDTO returned = partnerService.getPartner(partnerId);
-    return new ResponseEntity<PartnerDTO>(returned, HttpStatus.OK);
+  @PostMapping(value="/login")
+  public ResponseEntity<PartnerDTO> authenticatePartner(@RequestBody PartnerDTO partnerDTO) throws BackyardWeddingException {
+    PartnerDTO dto = partnerService.authenticatePartner(partnerDTO.getPartnerId(), partnerDTO.getFirstName(), partnerDTO.getLastName());
+    return new ResponseEntity<>(dto, HttpStatus.OK);
   }
+
+
+  // @GetMapping(value = "/getpartner/{partnerId}")
+  // public ResponseEntity<PartnerDTO> getPartnerWithId(@PathVariable("partnerId")Integer partnerId)
+  //     throws BackyardWeddingException {
+  //   PartnerDTO returned = partnerService.getPartner(partnerId);
+  //   return new ResponseEntity<PartnerDTO>(returned, HttpStatus.OK);
+  // }
 
   @PostMapping(value = "/addbackyard/{partnerId}")
   public ResponseEntity<String> addBackyardForPartner(@PathVariable(name = "partnerId") Integer partnerId,

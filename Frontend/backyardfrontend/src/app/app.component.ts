@@ -1,7 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { PartnerHomeService } from './partner/partnerHome/partnerHome.service';
-import { Partner } from './shared/entity/Partner';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

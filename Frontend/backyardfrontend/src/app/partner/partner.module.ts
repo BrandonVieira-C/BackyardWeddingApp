@@ -3,13 +3,13 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { PartnerRoutingModule } from "./partner-routing.module";
-import { PartnerHomeComponent } from "./partnerHome/partnerHome.component";
-import { PartnerHomeService } from "./partnerHome/partnerHome.service";
+import { PartnerLoginRegistrationComponent } from "./partner-landing-page/login-registration.component"
+import { PartnerLoginRegistrationService } from "./partner-landing-page/login-registration.service"
 
 
 @NgModule({
   declarations:[
-    PartnerHomeComponent
+    PartnerLoginRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +19,7 @@ import { PartnerHomeService } from "./partnerHome/partnerHome.service";
     PartnerRoutingModule
   ],
   providers:[
-    PartnerHomeService
+    PartnerLoginRegistrationService
   ],
   exports: []
 })

@@ -38,32 +38,6 @@ public class PartnerServiceImpl implements PartnerService {
   }
 
   @Override
-  public PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException {
-    Partner partner = partnerRepository.findById(partnerId).orElseThrow(
-        () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
-
-    PartnerDTO partnerDTO = new PartnerDTO();
-    partnerDTO.setPartnerId(partner.getPartnerId());
-    partnerDTO.setFirstName(partner.getFirstName());
-    partnerDTO.setLastName(partner.getLastName());
-    partnerDTO.setPartnerRating(partner.getPartnerRating());
-
-    List<Backyard> partnerBackyards = partner.getBackyards();
-    List<BackyardDTO> partnerBackyardsDTO = partnerBackyards.stream().map(entity -> {
-      BackyardDTO dto = new BackyardDTO();
-      dto.setBackyardId(entity.getBackyardId());
-      dto.setBackyardDescription(entity.getBackyardDescription());
-      dto.setBackyardRating(entity.getBackyardRating());
-      dto.setBackyardCity(entity.getBackyardCity());
-      dto.setBackyardCost(entity.getBackyardCost());
-      // not setting partnerId here because it seems redundant.
-      return dto;
-    }).collect(Collectors.toList());
-    partnerDTO.setPartnerBackyards(partnerBackyardsDTO);
-    return partnerDTO;
-  }
-
-  @Override
   public List<PartnerDTO> getAllPartner() throws BackyardWeddingException {
     Iterable<Partner> partners = partnerRepository.findAll();
     
@@ -89,6 +63,64 @@ public class PartnerServiceImpl implements PartnerService {
     partnerRepository.delete(partner);
     return "SERVICE: partner deleted successfully." ;
   }
+
+  @Override
+  public PartnerDTO authenticatePartner(Integer partnerId, String firstName, String lastName) throws BackyardWeddingException {
+    Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+      () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+    
+    if(!firstName.equals(partner.getFirstName()) || !lastName.equals(partner.getLastName())) {
+      throw new BackyardWeddingException("SERVICE ERROR: incorrect first or last name");
+    }
+
+    PartnerDTO partnerDTO = new PartnerDTO();
+    partnerDTO.setPartnerId(partner.getPartnerId());
+    partnerDTO.setFirstName(partner.getFirstName());
+    partnerDTO.setLastName(partner.getLastName());
+    partnerDTO.setPartnerRating(partner.getPartnerRating());
+
+    List<Backyard> partnerBackyards = partner.getBackyards();
+    List<BackyardDTO> partnerBackyardsDTO = partnerBackyards.stream().map(entity -> {
+      BackyardDTO dto = new BackyardDTO();
+      dto.setBackyardId(entity.getBackyardId());
+      dto.setBackyardDescription(entity.getBackyardDescription());
+      dto.setBackyardRating(entity.getBackyardRating());
+      dto.setBackyardCity(entity.getBackyardCity());
+      dto.setBackyardCost(entity.getBackyardCost());
+      // not setting partnerId here because it seems redundant.
+      return dto;
+    }).collect(Collectors.toList());
+    partnerDTO.setPartnerBackyards(partnerBackyardsDTO);
+    return partnerDTO;
+  }
+
+  // @Override
+  // public PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException {
+  //   Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+  //       () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
+
+  //   PartnerDTO partnerDTO = new PartnerDTO();
+  //   partnerDTO.setPartnerId(partner.getPartnerId());
+  //   partnerDTO.setFirstName(partner.getFirstName());
+  //   partnerDTO.setLastName(partner.getLastName());
+  //   partnerDTO.setPartnerRating(partner.getPartnerRating());
+
+  //   List<Backyard> partnerBackyards = partner.getBackyards();
+  //   List<BackyardDTO> partnerBackyardsDTO = partnerBackyards.stream().map(entity -> {
+  //     BackyardDTO dto = new BackyardDTO();
+  //     dto.setBackyardId(entity.getBackyardId());
+  //     dto.setBackyardDescription(entity.getBackyardDescription());
+  //     dto.setBackyardRating(entity.getBackyardRating());
+  //     dto.setBackyardCity(entity.getBackyardCity());
+  //     dto.setBackyardCost(entity.getBackyardCost());
+  //     // not setting partnerId here because it seems redundant.
+  //     return dto;
+  //   }).collect(Collectors.toList());
+  //   partnerDTO.setPartnerBackyards(partnerBackyardsDTO);
+  //   return partnerDTO;
+  // }
+
+ 
 
 
   @Override
@@ -122,6 +154,8 @@ public class PartnerServiceImpl implements PartnerService {
 
     return "SERVICE: backyard removed successfully.";
   }
+
+ 
 
 
 

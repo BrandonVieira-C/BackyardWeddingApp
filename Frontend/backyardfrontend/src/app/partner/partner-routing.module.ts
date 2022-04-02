@@ -1,14 +1,18 @@
 import { NgModule } from "@angular/core";
-import { Router, RouterModule, Routes } from "@angular/router";
-import { PartnerHomeComponent } from "./partnerHome/partnerHome.component";
+import { RouterModule, Routes } from "@angular/router";
+import { PartnerHomePageComponent } from "./partner-home-page/partner-home-page.component";
+import { PartnerLoginRegistrationComponent } from "./partner-landing-page/login-registration.component";
 
 
 
 
 const routes : Routes = [
-  { path: 'partnerHome', component: PartnerHomeComponent, children:[
-    //login
-    //add backyard
+  { path: 'partnerLanding', component:PartnerLoginRegistrationComponent, children:[
+    // login
+    // register
+  ]},
+  { path: 'partnerHome', component:PartnerHomePageComponent, children: [
+    // view all backyards
   ]}
 ]
 
