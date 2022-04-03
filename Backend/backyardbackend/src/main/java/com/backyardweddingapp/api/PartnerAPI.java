@@ -53,6 +53,12 @@ public class PartnerAPI {
     return new ResponseEntity<>(dto, HttpStatus.OK);
   }
 
+  @GetMapping(value="/getallbackyards/{partnerId}")
+  public ResponseEntity<List<BackyardDTO>> getPartnerBackyards(@PathVariable(name="partnerId") Integer partnerId) throws BackyardWeddingException{
+    List<BackyardDTO> list = partnerService.getPartnerBackyards(partnerId);
+    return new ResponseEntity<>(list, HttpStatus.OK);
+  }
+
 
   // @GetMapping(value = "/getpartner/{partnerId}")
   // public ResponseEntity<PartnerDTO> getPartnerWithId(@PathVariable("partnerId")Integer partnerId)

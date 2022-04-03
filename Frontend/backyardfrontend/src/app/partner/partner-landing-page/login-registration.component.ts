@@ -125,8 +125,4 @@ export class PartnerLoginRegistrationComponent implements OnInit {
     })
   }
 
-
-
-
-
 }

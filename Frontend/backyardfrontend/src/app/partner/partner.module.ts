@@ -5,6 +5,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { PartnerRoutingModule } from "./partner-routing.module";
 import { PartnerLoginRegistrationComponent } from "./partner-landing-page/login-registration.component"
 import { PartnerLoginRegistrationService } from "./partner-landing-page/login-registration.service"
+import { PartnerHomeService } from "./partner-home-page/partner-home.service";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { PartnerLoginRegistrationService } from "./partner-landing-page/login-re
     PartnerRoutingModule
   ],
   providers:[
-    PartnerLoginRegistrationService
+    PartnerLoginRegistrationService,
+    PartnerHomeService
   ],
   exports: []
 })

@@ -4,5 +4,5 @@ export class Backyard { //export interface?
   backyardRating: number;
   backyardCity: string;
   backyardCost: number;
-  
+  partnerId: number;
 }

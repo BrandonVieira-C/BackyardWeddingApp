@@ -1,0 +1,13 @@
+partner logged in page which will shows table of backyards
+
+<div *ngFor="let backyard of backyardList">
+  <div class="card">
+    <div class="row">
+      <div class="col card-block offset-1">
+        <br>
+        <h3>{{backyard.backyardDescription}}</h3>
+        <strong>CITY:</strong>{{backyard.city}}
+      </div>
+    </div>
+  </div>
+</div>

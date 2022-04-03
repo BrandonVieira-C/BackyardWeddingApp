@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PartnerHomePageComponent } from "./partner-home-page/partner-home-page.component";
+import { PartnerHomePageComponent } from "./partner-home-page/partner-home.component";
 import { PartnerLoginRegistrationComponent } from "./partner-landing-page/login-registration.component";
 
 

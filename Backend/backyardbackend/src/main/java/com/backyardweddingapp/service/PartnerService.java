@@ -13,6 +13,7 @@ public interface PartnerService {
   PartnerDTO authenticatePartner(Integer partnerId, String firstName, String lastName) throws BackyardWeddingException;
 
   // PartnerDTO getPartner(Integer partnerId) throws BackyardWeddingException;
+  List<BackyardDTO> getPartnerBackyards(Integer partnerId) throws BackyardWeddingException;
 
   Integer addBackyardForPartner(Integer partnerId, BackyardDTO backyardDTO) throws BackyardWeddingException; //returns newly added backyardId.
   String deleteBackyard(Integer backyardId) throws BackyardWeddingException; //returns success message
