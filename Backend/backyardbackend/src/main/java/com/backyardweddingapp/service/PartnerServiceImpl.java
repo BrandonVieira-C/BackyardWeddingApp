@@ -96,35 +96,6 @@ public class PartnerServiceImpl implements PartnerService {
     return partnerDTO;
   }
 
-  // @Override
-  // public PartnerDTO getPartner(Integer partnerId) throws
-  // BackyardWeddingException {
-  // Partner partner = partnerRepository.findById(partnerId).orElseThrow(
-  // () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner
-  // with that partnerId."));
-
-  // PartnerDTO partnerDTO = new PartnerDTO();
-  // partnerDTO.setPartnerId(partner.getPartnerId());
-  // partnerDTO.setFirstName(partner.getFirstName());
-  // partnerDTO.setLastName(partner.getLastName());
-  // partnerDTO.setPartnerRating(partner.getPartnerRating());
-
-  // List<Backyard> partnerBackyards = partner.getBackyards();
-  // List<BackyardDTO> partnerBackyardsDTO = partnerBackyards.stream().map(entity
-  // -> {
-  // BackyardDTO dto = new BackyardDTO();
-  // dto.setBackyardId(entity.getBackyardId());
-  // dto.setBackyardDescription(entity.getBackyardDescription());
-  // dto.setBackyardRating(entity.getBackyardRating());
-  // dto.setBackyardCity(entity.getBackyardCity());
-  // dto.setBackyardCost(entity.getBackyardCost());
-  // // not setting partnerId here because it seems redundant.
-  // return dto;
-  // }).collect(Collectors.toList());
-  // partnerDTO.setPartnerBackyards(partnerBackyardsDTO);
-  // return partnerDTO;
-  // }
-
   @Override
   public List<BackyardDTO> getPartnerBackyards(Integer partnerId) throws BackyardWeddingException {
     Partner partner = partnerRepository.findById(partnerId).orElseThrow(
@@ -147,13 +118,13 @@ public class PartnerServiceImpl implements PartnerService {
   }
 
   @Override
-  public Integer addBackyardForPartner(Integer partnerId, BackyardDTO backyardDTO) throws BackyardWeddingException {
-    Partner partner = partnerRepository.findById(partnerId).orElseThrow(
+  public Integer addBackyardForPartner(BackyardDTO backyardDTO) throws BackyardWeddingException {
+    Partner partner = partnerRepository.findById(backyardDTO.getPartnerId()).orElseThrow(
         () -> new BackyardWeddingException("SERVICE ERROR: Could not find partner with that partnerId."));
 
     List<Backyard> listOfPartnerBackyards = partner.getBackyards();
     Backyard newBackyard = new Backyard();
-    newBackyard.setPartnerId(partnerId);
+    newBackyard.setPartnerId(backyardDTO.getPartnerId());
     newBackyard.setBackyardDescription(backyardDTO.getBackyardDescription());
     newBackyard.setBackyardRating(backyardDTO.getBackyardRating()); // not sure who actually sets the backyardRating
     newBackyard.setBackyardCity(backyardDTO.getBackyardCity());
