@@ -1,4 +1,3 @@
-import { Backyard } from "./Backyard";
 
 export class Partner {
   partnerId: number;

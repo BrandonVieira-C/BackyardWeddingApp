@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PartnerDashboardComponent } from './dashboard/partner-dashboard/partner-dashboard.component';
 import { PartnerDashboardService } from './dashboard/partner-dashboard/partner-dashboard.service';
+import { HomeComponent } from './home/home.component';
+import { HomeService } from './home/home.service';
 import { PartnerLoginComponent } from './login/partner-login/partner-login.component';
 import { PartnerLoginService } from './login/partner-login/partner-login.service';
 import { PartnerSignupComponent } from './signup/partner-signup/partner-signup.component';
@@ -15,6 +17,7 @@ import { PartnerSignupService } from './signup/partner-signup/partner-signup.ser
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     PartnerLoginComponent,
     PartnerSignupComponent,
     PartnerDashboardComponent
@@ -27,9 +30,11 @@ import { PartnerSignupService } from './signup/partner-signup/partner-signup.ser
     AppRoutingModule
   ],
   providers: [
+    HomeService,
     PartnerLoginService,
     PartnerSignupService,
-    PartnerDashboardService
+    PartnerDashboardService,
+    
   ],
   bootstrap: [AppComponent]
 })

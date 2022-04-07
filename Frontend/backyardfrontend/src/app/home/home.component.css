@@ -88,3 +88,28 @@ body{
 .bg-custom, .btn-custom, .timeline-page .timeline-item .date-label-left::after, .timeline-page .timeline-item .duration-right::after, .back-to-top:hover {
   background-color: #f6576e;
 }
+
+
+/* ========================================================================================================================================= */
+body {
+  font-size: 62.5%;
+  /*sets 1em to 10px for convenience*/
+  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+a {
+  font-size: 1em;
+}
+
+a img {
+  height: 1em;
+  width: auto;
+}
+
+.nounderline {
+  text-decoration: none !important
+}
