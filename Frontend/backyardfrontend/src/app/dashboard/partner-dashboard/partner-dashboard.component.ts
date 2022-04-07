@@ -64,7 +64,7 @@ export class PartnerDashboardComponent implements OnInit {
 
     this.newBackyard = this.addBackyardForm.value as Backyard;
     this.newBackyard.partnerId = this.loggedInPartner.partnerId;
-
+    console.warn(this.newBackyard)
     this.partnerDashboardService.addPartnerBackyard(this.newBackyard).subscribe({
       next: response => {
         this.successMsg = response;
